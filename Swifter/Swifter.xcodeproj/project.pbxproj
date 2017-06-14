@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5EAD63231EF13D4000EBF944 /* GLCentralManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAD63221EF13D4000EBF944 /* GLCentralManager.swift */; };
 		5EED44E71EF12DB7006F7C2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EED44E61EF12DB7006F7C2F /* AppDelegate.swift */; };
 		5EED44E91EF12DB7006F7C2F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EED44E81EF12DB7006F7C2F /* ViewController.swift */; };
 		5EED44EC1EF12DB7006F7C2F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EED44EA1EF12DB7006F7C2F /* Main.storyboard */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5EAD63221EF13D4000EBF944 /* GLCentralManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLCentralManager.swift; sourceTree = "<group>"; };
 		5EED44E31EF12DB7006F7C2F /* Swifter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swifter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EED44E61EF12DB7006F7C2F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5EED44E81EF12DB7006F7C2F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 			children = (
 				5EED44E61EF12DB7006F7C2F /* AppDelegate.swift */,
 				5EED44E81EF12DB7006F7C2F /* ViewController.swift */,
+				5EAD63221EF13D4000EBF944 /* GLCentralManager.swift */,
 				5EED44EA1EF12DB7006F7C2F /* Main.storyboard */,
 				5EED44ED1EF12DB7006F7C2F /* Assets.xcassets */,
 				5EED44EF1EF12DB7006F7C2F /* LaunchScreen.storyboard */,
@@ -258,6 +261,7 @@
 			files = (
 				5EED44E91EF12DB7006F7C2F /* ViewController.swift in Sources */,
 				5EED44E71EF12DB7006F7C2F /* AppDelegate.swift in Sources */,
+				5EAD63231EF13D4000EBF944 /* GLCentralManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,6 +528,7 @@
 				5EED450D1EF12DB7006F7C2F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5EED450E1EF12DB7006F7C2F /* Build configuration list for PBXNativeTarget "SwifterTests" */ = {
 			isa = XCConfigurationList;
@@ -532,6 +537,7 @@
 				5EED45101EF12DB7006F7C2F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5EED45111EF12DB7006F7C2F /* Build configuration list for PBXNativeTarget "SwifterUITests" */ = {
 			isa = XCConfigurationList;
@@ -540,6 +546,7 @@
 				5EED45131EF12DB7006F7C2F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

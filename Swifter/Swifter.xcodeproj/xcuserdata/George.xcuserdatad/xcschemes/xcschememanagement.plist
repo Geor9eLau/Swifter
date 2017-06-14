@@ -4,10 +4,33 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Swifter 2.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>Swifter.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>5EED44E21EF12DB7006F7C2F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5EED44F61EF12DB7006F7C2F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5EED45011EF12DB7006F7C2F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>
