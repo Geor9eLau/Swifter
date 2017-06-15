@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E47A51F1EF25D9500FC83C2 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E47A51E1EF25D9500FC83C2 /* Player.swift */; };
+		5E47A5211EF2756B00FC83C2 /* GLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E47A5201EF2756B00FC83C2 /* GLError.swift */; };
 		5EAD63231EF13D4000EBF944 /* GLCentralManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAD63221EF13D4000EBF944 /* GLCentralManager.swift */; };
 		5ED867C11EF219C300F58AC1 /* GLPeripheralManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED867C01EF219C300F58AC1 /* GLPeripheralManager.swift */; };
 		5EED44E71EF12DB7006F7C2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EED44E61EF12DB7006F7C2F /* AppDelegate.swift */; };
@@ -36,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5E47A51E1EF25D9500FC83C2 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		5E47A5201EF2756B00FC83C2 /* GLError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLError.swift; sourceTree = "<group>"; };
 		5EAD63221EF13D4000EBF944 /* GLCentralManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLCentralManager.swift; sourceTree = "<group>"; };
 		5ED867C01EF219C300F58AC1 /* GLPeripheralManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLPeripheralManager.swift; sourceTree = "<group>"; };
 		5EED44E31EF12DB7006F7C2F /* Swifter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swifter.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,6 +109,8 @@
 				5EED44E81EF12DB7006F7C2F /* ViewController.swift */,
 				5EAD63221EF13D4000EBF944 /* GLCentralManager.swift */,
 				5ED867C01EF219C300F58AC1 /* GLPeripheralManager.swift */,
+				5E47A5201EF2756B00FC83C2 /* GLError.swift */,
+				5E47A51E1EF25D9500FC83C2 /* Player.swift */,
 				5EED44EA1EF12DB7006F7C2F /* Main.storyboard */,
 				5EED44ED1EF12DB7006F7C2F /* Assets.xcassets */,
 				5EED44EF1EF12DB7006F7C2F /* LaunchScreen.storyboard */,
@@ -265,6 +271,8 @@
 				5EED44E91EF12DB7006F7C2F /* ViewController.swift in Sources */,
 				5EED44E71EF12DB7006F7C2F /* AppDelegate.swift in Sources */,
 				5ED867C11EF219C300F58AC1 /* GLPeripheralManager.swift in Sources */,
+				5E47A5211EF2756B00FC83C2 /* GLError.swift in Sources */,
+				5E47A51F1EF25D9500FC83C2 /* Player.swift in Sources */,
 				5EAD63231EF13D4000EBF944 /* GLCentralManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
