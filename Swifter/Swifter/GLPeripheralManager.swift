@@ -20,10 +20,12 @@ class GLPeripheralManager: NSObject, CBPeripheralManagerDelegate {
        return GLPeripheralManager()
     }()
     
-    private let queue = DispatchQueue(label: "PeripheralQueue")
-    private var manager: CBPeripheralManager!
-    private var subscribedCenteral: [CBCentral] = []
-    private var targetCharacteristic: CBMutableCharacteristic?
+    fileprivate let queue = DispatchQueue(label: "PeripheralQueue")
+    fileprivate var manager: CBPeripheralManager!
+    fileprivate var subscribedCenteral: [CBCentral] = []
+    fileprivate var gameSwitchCharacteristic: CBMutableCharacteristic?
+    fileprivate var playerDataCharacteristic: CBMutableCharacteristic?
+    
     weak var delegate: GLPeripheralManagerDelegate?
     private override init() {
         super.init()
@@ -35,10 +37,15 @@ class GLPeripheralManager: NSObject, CBPeripheralManagerDelegate {
 // MARK: - Private
 extension GLPeripheralManager {
     func setupService(){
-        targetCharacteristic = CBMutableCharacteristic(type: CBUUID(string: CharacteristicsUUIDString), properties: [.notify , .read] , value: nil, permissions: [.writeable, .readable])
-        let service = CBMutableService(type: CBUUID(string: ServiceUUIDString), primary: true)
-        service.characteristics = [targetCharacteristic!]
-        manager.add(service)
+        playerDataCharacteristic = CBMutableCharacteristic(type: CBUUID(string: PlayerDataCharacteristicUUIDString), properties: [.notify , .read] , value: nil, permissions: [.writeable, .readable])
+        gameSwitchCharacteristic = CBMutableCharacteristic(type: CBUUID(string: GameSwitchCharacteristicUUIDString), properties: [.notify , .read] , value: nil, permissions: [.writeable, .readable])
+        let playerDataService = CBMutableService(type: CBUUID(string: PlayerDataCharacteristicUUIDString), primary: true)
+        playerDataService.characteristics = [playerDataCharacteristic!]
+        
+        let gameSwitchService = CBMutableService(type: CBUUID(string: GameSwitchCharacteristicUUIDString), primary: true)
+        gameSwitchService.characteristics = [gameSwitchCharacteristic!]
+        manager.add(playerDataService)
+        manager.add(gameSwitchService)
     }
 }
 
@@ -47,7 +54,7 @@ extension GLPeripheralManager {
 extension GLPeripheralManager {
     func startAdvertising() {
         if manager.state == .poweredOn{
-            manager.startAdvertising([CBAdvertisementDataLocalNameKey: "George", CBAdvertisementDataServiceUUIDsKey: [CBUUID(string: ServiceUUIDString)]])
+            manager.startAdvertising([CBAdvertisementDataLocalNameKey: "George", CBAdvertisementDataServiceUUIDsKey: [CBUUID(string: PlayerDataServiceUUIDString), CBUUID(string: GameSwitchServiceUUIDString)]])
         }
     }
     
@@ -55,10 +62,12 @@ extension GLPeripheralManager {
         if manager.isAdvertising {
             manager.stopAdvertising()
         }
+        
+        
     }
     
     func send(_ data: Data) {
-        if let characteristic = targetCharacteristic {
+        if let characteristic = playerDataCharacteristic {
             manager.updateValue(data, for: characteristic, onSubscribedCentrals: subscribedCenteral)
         }
     }

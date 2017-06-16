@@ -1,0 +1,569 @@
+BCSymbolMap Version: 2.0
+-[UIColor(ChameleonPrivate) setCount:]
+-[UIColor(ChameleonPrivate) count]
++[UIColor(ChameleonPrivate) colorFromImage:atPoint:]
+-[UIColor(ChameleonPrivate) colorWithMinimumSaturation:]
+-[UIColor(ChameleonPrivate) isDistinct:]
+-[UIColor(ChameleonPrivate) getValueForX:valueForY:valueForZ:alpha:]
+-[UIColor(ChameleonPrivate) getLightness:valueForA:valueForB:alpha:]
+-[UIColor(ChameleonPrivate) arrayOfXYZValuesForR:G:B:A:]
+___56-[UIColor(ChameleonPrivate) arrayOfXYZValuesForR:G:B:A:]_block_invoke
+-[UIColor(ChameleonPrivate) arrayOfLABValuesForX:Y:Z:alpha:]
+___60-[UIColor(ChameleonPrivate) arrayOfLABValuesForX:Y:Z:alpha:]_block_invoke
+___block_descriptor_tmp
+___block_literal_global
+___block_descriptor_tmp.31
+___block_literal_global.32
+Apple LLVM version 8.1.0 (clang-802.0.42)
+/Users/George/Swifter/Carthage/Checkouts/Chameleon/Pod/Classes/Objective-C/UIColor+ChameleonPrivate.m
+/Users/George/Swifter/Carthage/Checkouts/Chameleon
+__60-[UIColor(ChameleonPrivate) arrayOfLABValuesForX:Y:Z:alpha:]_block_invoke
+__56-[UIColor(ChameleonPrivate) arrayOfXYZValuesForR:G:B:A:]_block_invoke
+CGRectMake
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CGGeometry.h
++[UIApplication(CHSharedApplication) load]
++[UIApplication(CHSharedApplication) CH_sharedApplication]
+/Users/George/Swifter/Carthage/Checkouts/Chameleon/Pod/Classes/Objective-C/UIApplication+CHSharedApplication.m
+-[UIButton(Chameleon) setSubstituteFontName:]
+/Users/George/Swifter/Carthage/Checkouts/Chameleon/Pod/Classes/Objective-C/UIButton+Chameleon.m
++[NSArray(Chameleon) arrayOfColorsWithColorScheme:with:flatScheme:]
++[NSArray(Chameleon) arrayOfColorsWithColorScheme:usingColor:withFlatScheme:]
++[NSArray(Chameleon) arrayOfColorsFromImage:withFlatScheme:]
+-[NSArray(Chameleon) findColorsOfImage:imageColors:]
++[NSArray(Chameleon) analogousColorSchemeFromHue:Saturation:Brightness:flat:]
++[NSArray(Chameleon) complementaryColorSchemeFromHue:Saturation:Brightness:flat:]
++[NSArray(Chameleon) triadicColorSchemeFromHue:Saturation:Brightness:flat:]
++[NSArray(Chameleon) add:to:]
++[NSArray(Chameleon) colorWithFlatVersionOf:]
++[NSArray(Chameleon) flatColors]
++[NSArray(Chameleon) totalSumOfDifferencesFroml1:l2:a1:a2:b1:b2:]
++[NSArray(Chameleon) nearestFlatColorForL:A:B:alpha:]
+-[ChameleonCountedColor initWithColor:count:]
+-[ChameleonCountedColor compare:]
+-[ChameleonCountedColor count]
+-[ChameleonCountedColor setCount:]
+-[ChameleonCountedColor color]
+-[ChameleonCountedColor setColor:]
+-[ChameleonCountedColor .cxx_destruct]
+_OBJC_IVAR_$_ChameleonCountedColor._count
+_OBJC_IVAR_$_ChameleonCountedColor._color
+/Users/George/Swifter/Carthage/Checkouts/Chameleon/Pod/Classes/Objective-C/NSArray+Chameleon.m
+CGPointMake
+CGSizeMake
+-[UILabel(Chameleon) setSubstituteFontName:]
+/Users/George/Swifter/Carthage/Checkouts/Chameleon/Pod/Classes/Objective-C/UILabel+Chameleon.m
++[UIImage(ChameleonPrivate) colorFromImage:atPoint:]
++[UIImage(ChameleonPrivate) imageWithImage:scaledToSize:]
+-[UIImage(ChameleonPrivate) imageScaledToSize:]
+/Users/George/Swifter/Carthage/Checkouts/Chameleon/Pod/Classes/Objective-C/UIImage+ChameleonPrivate.m
+/Users/George/Swifter/Carthage/Checkouts/Chameleon/Pod/Classes/Objective-C/ChameleonConstants.m
+-[UIViewController(Chameleon) setShouldContrast:]
+-[UIViewController(Chameleon) shouldContrast]
+-[UIViewController(Chameleon) setShouldUseLightContent:]
+-[UIViewController(Chameleon) shouldUseLightContent]
++[UIViewController(Chameleon) load]
+___35+[UIViewController(Chameleon) load]_block_invoke
+___copy_helper_block_
+___destroy_helper_block_
+-[UIViewController(Chameleon) setStatusBarStyle:]
+-[UIViewController(Chameleon) chameleon_preferredStatusBarStyle]
+-[UIViewController(Chameleon) setThemeUsingPrimaryColor:withContentStyle:]
+-[UIViewController(Chameleon) setThemeUsingPrimaryColor:withSecondaryColor:andContentStyle:]
+-[UIViewController(Chameleon) setThemeUsingPrimaryColor:withSecondaryColor:usingFontName:andContentStyle:]
++[UIViewController(Chameleon) updateStatusBarWithPrimaryColor:andContentStyle:]
++[UIViewController(Chameleon) customizeBarButtonItemWithPrimaryColor:contentStyle:]
++[UIViewController(Chameleon) customizeBarButtonItemWithPrimaryColor:fontName:fontSize:contentStyle:]
++[UIViewController(Chameleon) customizeButtonWithPrimaryColor:withContentStyle:]
++[UIViewController(Chameleon) customizeButtonWithPrimaryColor:secondaryColor:withContentStyle:]
++[UIViewController(Chameleon) customizeImagePickerControllerWithPrimaryColor:withContentStyle:]
++[UIViewController(Chameleon) customizeLabelWithPrimaryColor:fontName:fontSize:withContentStyle:]
++[UIViewController(Chameleon) customizeNavigationBarWithPrimaryColor:withContentStyle:]
++[UIViewController(Chameleon) customizeNavigationBarWithBarColor:textColor:buttonColor:]
++[UIViewController(Chameleon) customizeNavigationBarWithBarColor:textColor:fontName:fontSize:buttonColor:]
++[UIViewController(Chameleon) customizePageControlWithPrimaryColor:withContentStyle:]
++[UIViewController(Chameleon) customizeProgressViewWithPrimaryColor:withContentStyle:]
++[UIViewController(Chameleon) customizeProgressViewWithPrimaryColor:andSecondaryColor:]
++[UIViewController(Chameleon) customizeSearchBarWithPrimaryColor:withContentStyle:]
++[UIViewController(Chameleon) customizeSegmentedControlWithPrimaryColor:withContentStyle:]
++[UIViewController(Chameleon) customizeSegmentedControlWithPrimaryColor:withFontName:withFontSize:withContentStyle:]
++[UIViewController(Chameleon) customizeSliderWithPrimaryColor:withContentStyle:]
++[UIViewController(Chameleon) customizeSliderWithPrimaryColor:andSecondaryColor:]
++[UIViewController(Chameleon) customizeStepperWithPrimaryColor:withContentStyle:]
++[UIViewController(Chameleon) customizeSwitchWithPrimaryColor:]
++[UIViewController(Chameleon) customizeSwitchWithPrimaryColor:andSecondaryColor:]
++[UIViewController(Chameleon) customizeTabBarWithBarTintColor:andTintColor:]
++[UIViewController(Chameleon) customizeTabBarWithBarTintColor:tintColor:fontName:fontSize:]
++[UIViewController(Chameleon) customizeToolbarWithPrimaryColor:withContentStyle:]
+-[UIViewController(Chameleon) contrastingStatusBarStyleForColor:]
+_load.onceToken
+/Users/George/Swifter/Carthage/Checkouts/Chameleon/Pod/Classes/Objective-C/UIViewController+Chameleon.m
+__destroy_helper_block_
+__copy_helper_block_
+__35+[UIViewController(Chameleon) load]_block_invoke
+_dispatch_once
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/usr/include/dispatch/once.h
++[UINavigationController(Chameleon) load]
+___41+[UINavigationController(Chameleon) load]_block_invoke
+-[UINavigationController(Chameleon) chameleon_viewDidLoad]
+-[UINavigationController(Chameleon) findHairlineImageViewUnder:]
+-[UINavigationController(Chameleon) setShouldContrast:]
+-[UINavigationController(Chameleon) shouldContrast]
+-[UINavigationController(Chameleon) setShouldUseLightContent:]
+-[UINavigationController(Chameleon) shouldUseLightContent]
+-[UINavigationController(Chameleon) setHidesNavigationBarHairline:]
+-[UINavigationController(Chameleon) hidesNavigationBarHairline]
+-[UINavigationController(Chameleon) setStatusBarStyle:]
+-[UINavigationController(Chameleon) preferredStatusBarStyle]
+-[UINavigationController(Chameleon) contrastingStatusBarStyleForColor:]
+/Users/George/Swifter/Carthage/Checkouts/Chameleon/Pod/Classes/Objective-C/UINavigationController+Chameleon.m
+__41+[UINavigationController(Chameleon) load]_block_invoke
++[UIView(UIViewAppearance_Swift) appearanceWhenContainedWithin:]
+/Users/George/Swifter/Carthage/Checkouts/Chameleon/Pod/Classes/Objective-C/UIAppearance+Swift.m
+-[UIView(ChameleonPrivate) isTopViewInWindow]
+-[UIView(ChameleonPrivate) findTopMostViewForPoint:]
+/Users/George/Swifter/Carthage/Checkouts/Chameleon/Pod/Classes/Objective-C/UIView+ChameleonPrivate.m
++[Chameleon setGlobalThemeUsingPrimaryColor:withContentStyle:]
++[Chameleon setGlobalThemeUsingPrimaryColor:withSecondaryColor:andContentStyle:]
++[Chameleon setGlobalThemeUsingPrimaryColor:withSecondaryColor:usingFontName:andContentStyle:]
++[Chameleon updateStatusBarWithPrimaryColor:andContentStyle:]
++[Chameleon customizeBarButtonItemWithPrimaryColor:contentStyle:]
++[Chameleon customizeBarButtonItemWithPrimaryColor:fontName:fontSize:contentStyle:]
++[Chameleon customizeButtonWithPrimaryColor:withContentStyle:]
++[Chameleon customizeButtonWithPrimaryColor:secondaryColor:withContentStyle:]
++[Chameleon customizeImagePickerControllerWithPrimaryColor:withContentStyle:]
++[Chameleon customizeLabelWithPrimaryColor:fontName:fontSize:withContentStyle:]
++[Chameleon customizeNavigationBarWithPrimaryColor:withContentStyle:]
++[Chameleon customizeNavigationBarWithBarColor:textColor:buttonColor:]
++[Chameleon customizeNavigationBarWithBarColor:textColor:fontName:fontSize:buttonColor:]
++[Chameleon customizePageControlWithPrimaryColor:withContentStyle:]
++[Chameleon customizeProgressViewWithPrimaryColor:withContentStyle:]
++[Chameleon customizeProgressViewWithPrimaryColor:andSecondaryColor:]
++[Chameleon customizeSearchBarWithPrimaryColor:withContentStyle:]
++[Chameleon customizeSegmentedControlWithPrimaryColor:withContentStyle:]
++[Chameleon customizeSegmentedControlWithPrimaryColor:withFontName:withFontSize:withContentStyle:]
++[Chameleon customizeSliderWithPrimaryColor:withContentStyle:]
++[Chameleon customizeSliderWithPrimaryColor:andSecondaryColor:]
++[Chameleon customizeStepperWithPrimaryColor:withContentStyle:]
++[Chameleon customizeSwitchWithPrimaryColor:]
++[Chameleon customizeSwitchWithPrimaryColor:andSecondaryColor:]
++[Chameleon customizeTabBarWithBarTintColor:andTintColor:]
++[Chameleon customizeTabBarWithBarTintColor:tintColor:fontName:fontSize:]
++[Chameleon customizeToolbarWithPrimaryColor:withContentStyle:]
+/Users/George/Swifter/Carthage/Checkouts/Chameleon/Pod/Classes/Objective-C/Chameleon_.m
++[UIColor(Chameleon) setGradientImage:]
++[UIColor(Chameleon) gradientImage]
++[UIColor(Chameleon) flatBlackColor]
++[UIColor(Chameleon) flatBlueColor]
++[UIColor(Chameleon) flatBrownColor]
++[UIColor(Chameleon) flatCoffeeColor]
++[UIColor(Chameleon) flatForestGreenColor]
++[UIColor(Chameleon) flatGrayColor]
++[UIColor(Chameleon) flatGreenColor]
++[UIColor(Chameleon) flatLimeColor]
++[UIColor(Chameleon) flatMagentaColor]
++[UIColor(Chameleon) flatMaroonColor]
++[UIColor(Chameleon) flatMintColor]
++[UIColor(Chameleon) flatNavyBlueColor]
++[UIColor(Chameleon) flatOrangeColor]
++[UIColor(Chameleon) flatPinkColor]
++[UIColor(Chameleon) flatPlumColor]
++[UIColor(Chameleon) flatPowderBlueColor]
++[UIColor(Chameleon) flatPurpleColor]
++[UIColor(Chameleon) flatRedColor]
++[UIColor(Chameleon) flatSandColor]
++[UIColor(Chameleon) flatSkyBlueColor]
++[UIColor(Chameleon) flatTealColor]
++[UIColor(Chameleon) flatWatermelonColor]
++[UIColor(Chameleon) flatWhiteColor]
++[UIColor(Chameleon) flatYellowColor]
++[UIColor(Chameleon) flatBlackColorDark]
++[UIColor(Chameleon) flatBlueColorDark]
++[UIColor(Chameleon) flatBrownColorDark]
++[UIColor(Chameleon) flatCoffeeColorDark]
++[UIColor(Chameleon) flatForestGreenColorDark]
++[UIColor(Chameleon) flatGrayColorDark]
++[UIColor(Chameleon) flatGreenColorDark]
++[UIColor(Chameleon) flatLimeColorDark]
++[UIColor(Chameleon) flatMagentaColorDark]
++[UIColor(Chameleon) flatMaroonColorDark]
++[UIColor(Chameleon) flatMintColorDark]
++[UIColor(Chameleon) flatNavyBlueColorDark]
++[UIColor(Chameleon) flatOrangeColorDark]
++[UIColor(Chameleon) flatPinkColorDark]
++[UIColor(Chameleon) flatPlumColorDark]
++[UIColor(Chameleon) flatPowderBlueColorDark]
++[UIColor(Chameleon) flatPurpleColorDark]
++[UIColor(Chameleon) flatRedColorDark]
++[UIColor(Chameleon) flatSandColorDark]
++[UIColor(Chameleon) flatSkyBlueColorDark]
++[UIColor(Chameleon) flatTealColorDark]
++[UIColor(Chameleon) flatWatermelonColorDark]
++[UIColor(Chameleon) flatWhiteColorDark]
++[UIColor(Chameleon) flatYellowColorDark]
++[UIColor(Chameleon) colorWithAverageColorFromImage:]
++[UIColor(Chameleon) colorWithAverageColorFromImage:withAlpha:]
++[UIColor(Chameleon) colorWithComplementaryFlatColorOf:]
++[UIColor(Chameleon) colorWithComplementaryFlatColorOf:withAlpha:]
++[UIColor(Chameleon) colorWithFlatVersionOf:]
++[UIColor(Chameleon) colorWithFlatVersionFrom:]
++[UIColor(Chameleon) colorWithFlatVersionOf:withAlpha:]
++[UIColor(Chameleon) colorWithContrastingBlackOrWhiteColorOn:isFlat:]
++[UIColor(Chameleon) colorWithContrastingBlackOrWhiteColorOn:isFlat:alpha:]
++[UIColor(Chameleon) colorWithGradientStyle:withFrame:andColors:]
++[UIColor(Chameleon) colorWithHexString:]
++[UIColor(Chameleon) colorWithHexString:withAlpha:]
++[UIColor(Chameleon) hexValueToUnsigned:]
++[UIColor(Chameleon) generateRandomNumberWithMax:]
++[UIColor(Chameleon) randomFlatColor]
++[UIColor(Chameleon) colorWithRandomColorInArray:]
++[UIColor(Chameleon) colorWithRandomFlatColorExcludingColorsInArray:]
++[UIColor(Chameleon) colorWithRandomFlatColorOfShadeStyle:]
++[UIColor(Chameleon) colorWithRandomFlatColorOfShadeStyle:withAlpha:]
+-[UIColor(Chameleon) flatten]
+-[UIColor(Chameleon) darkenByPercentage:]
+-[UIColor(Chameleon) hexValue]
+-[UIColor(Chameleon) lightenByPercentage:]
+-[UIColor(Chameleon) isEqualToColor:]
++[UIColor(Chameleon) flatColors]
+-[UIColor(Chameleon) RGBAValue]
+-[UIColor(Chameleon) getRGBAComponents:]
+-[UIColor(Chameleon) isMonochromeOrRGB]
++[UIColor(Chameleon) totalSumOfDifferencesFroml1:l2:a1:a2:b1:b2:]
++[UIColor(Chameleon) nearestFlatColorForL:A:B:alpha:]
+/Users/George/Swifter/Carthage/Checkouts/Chameleon/Pod/Classes/Objective-C/UIColor+Chameleon.m
+__TF9Chameleon24ComplementaryFlatColorOfFCSo7UIColorS0__merged
+__TTSg5P____TFVs15ContiguousArray16_copyToNewBufferfT8oldCountSi_T_
+__TTSg5GVs22_ContiguousArrayBufferP__GS_P__s20_ArrayBufferProtocols___TFEsPs20_ArrayBufferProtocol31_forceCreateUniqueMutableBufferfT17countForNewBufferSi14minNewCapacitySi_GVs22_ContiguousArrayBufferwx7Element_
+__TTSr5CSo7UIColor_P____TFFs15_arrayForceCastu0_rFGSax_GSaq__U_Fxq_
+__TTSg5CSo7UIColor___TFVs12_ArrayBuffer19_getElementSlowPathfSiPs9AnyObject_
+_swift_rt_swift_getInitializedObjCClass
+__TTSf4n_n_d___TTSg5P____TFVs22_ContiguousArrayBufferCfT19_uninitializedCountSi15minimumCapacitySi_GS_x_
+__TTSf4n_n_n_d_n___TTSg5GVs22_ContiguousArrayBufferP__GS_P__s20_ArrayBufferProtocols_GVs14_IgnorePointerP__GS1_P__s16_PointerFunctions___TFEsPs20_ArrayBufferProtocol22_arrayOutOfPlaceUpdateuRd__s16_PointerFunctionwd__7Elementzwx7ElementrfTRGVs22_ContiguousArrayBufferwxS2__SiSiqd___T_
+__TTSf4g_n___TTSg5GSaCSo7UIColor_GSaS__s10Collections_P____TFEsPs10Collection3mapurfzFzWx8Iterator7Element_qd__GSaqd___
+_swift_rt_swift_getExistentialTypeMetadata
+__TTSf4g___TF9Chameleon24ComplementaryFlatColorOfFCSo7UIColorS0__merged
+_swift_rt_swift_retain
+_swift_rt_swift_release
+_swift_rt_swift_isUniquelyReferenced_nonNull_native
+_swift_rt_swift_allocObject
+_swift_rt_swift_dynamicCast
+__TMLP_
+__TMLGSaCSo7UIColor_
+__TMLCSo7UIColor
+__swift_FORCE_LOAD_$_swiftUIKit_$_Chameleon
+__swift_FORCE_LOAD_$_swiftCoreImage_$_Chameleon
+__swift_FORCE_LOAD_$_swiftDarwin_$_Chameleon
+__swift_FORCE_LOAD_$_swiftCoreGraphics_$_Chameleon
+__swift_FORCE_LOAD_$_swiftDispatch_$_Chameleon
+__swift_FORCE_LOAD_$_swiftObjectiveC_$_Chameleon
+__swift_FORCE_LOAD_$_swiftFoundation_$_Chameleon
+__swift_FORCE_LOAD_$_swiftQuartzCore_$_Chameleon
+___swift_reflection_version
+l_OBJC_LABEL_PROTOCOL_$__TtPs9AnyObject_
+l_OBJC_PROTOCOL_REFERENCE_$__TtPs9AnyObject_
+__TMLGCs23_ContiguousArrayStorageP__
+-emit-bc /Users/George/Swifter/Carthage/Checkouts/Chameleon/Pod/Classes/Swift/ChameleonShorthand.swift -target armv7-apple-ios8.0 -enable-objc-interop -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk -I /Users/George/Library/Caches/org.carthage.CarthageKit/DerivedData/Chameleon/2.2.0/Build/Products/Release-iphoneos -F /Users/George/Library/Caches/org.carthage.CarthageKit/DerivedData/Chameleon/2.2.0/Build/Products/Release-iphoneos -g -import-underlying-module -module-cache-path /Users/George/Library/Caches/org.carthage.CarthageKit/DerivedData/Chameleon/2.2.0/ModuleCache -serialize-debugging-options -Xcc -I/Users/George/Library/Caches/org.carthage.CarthageKit/DerivedData/Chameleon/2.2.0/Build/Intermediates/Chameleon.build/Release-iphoneos/Chameleon.build/swift-overrides.hmap -Xcc -iquote -Xcc /Users/George/Library/Caches/org.carthage.CarthageKit/DerivedData/Chameleon/2.2.0/Build/Intermediates/Chameleon.build/Release-iphoneos/Chameleon.build/Chameleon-generated-files.hmap -Xcc -I/Users/George/Library/Caches/org.carthage.CarthageKit/DerivedData/Chameleon/2.2.0/Build/Intermediates/Chameleon.build/Release-iphoneos/Chameleon.build/Chameleon-own-target-headers.hmap -Xcc -I/Users/George/Library/Caches/org.carthage.CarthageKit/DerivedData/Chameleon/2.2.0/Build/Intermediates/Chameleon.build/Release-iphoneos/Chameleon.build/Chameleon-all-non-framework-target-headers.hmap -Xcc -ivfsoverlay -Xcc /Users/George/Library/Caches/org.carthage.CarthageKit/DerivedData/Chameleon/2.2.0/Build/Intermediates/Chameleon.build/all-product-headers.yaml -Xcc -iquote -Xcc /Users/George/Library/Caches/org.carthage.CarthageKit/DerivedData/Chameleon/2.2.0/Build/Intermediates/Chameleon.build/Release-iphoneos/Chameleon.build/Chameleon-project-headers.hmap -Xcc -I/Users/George/Library/Caches/org.carthage.CarthageKit/DerivedData/Chameleon/2.2.0/Build/Products/Release-iphoneos/include -Xcc -I/Users/George/Library/Caches/org.carthage.CarthageKit/DerivedData/Chameleon/2.2.0/Build/Intermediates/Chameleon.build/Release-iphoneos/Chameleon.build/DerivedSources/armv7 -Xcc -I/Users/George/Library/Caches/org.carthage.CarthageKit/DerivedData/Chameleon/2.2.0/Build/Intermediates/Chameleon.build/Release-iphoneos/Chameleon.build/DerivedSources -Xcc -ivfsoverlay -Xcc /Users/George/Library/Caches/org.carthage.CarthageKit/DerivedData/Chameleon/2.2.0/Build/Intermediates/Chameleon.build/Release-iphoneos/Chameleon.build/unextended-module-overlay.yaml -Xcc -working-directory/Users/George/Swifter/Carthage/Checkouts/Chameleon -emit-module-doc-path /Users/George/Library/Caches/org.carthage.CarthageKit/DerivedData/Chameleon/2.2.0/Build/Intermediates/Chameleon.build/Release-iphoneos/Chameleon.build/Objects-normal/armv7/Chameleon.swiftdoc -serialize-diagnostics-path /Users/George/Library/Caches/org.carthage.CarthageKit/DerivedData/Chameleon/2.2.0/Build/Intermediates/Chameleon.build/Release-iphoneos/Chameleon.build/Objects-normal/armv7/ChameleonShorthand.dia -O -parse-as-library -module-name Chameleon -emit-module-path /Users/George/Library/Caches/org.carthage.CarthageKit/DerivedData/Chameleon/2.2.0/Build/Intermediates/Chameleon.build/Release-iphoneos/Chameleon.build/Objects-normal/armv7/Chameleon.swiftmodule -emit-objc-header-path /Users/George/Library/Caches/org.carthage.CarthageKit/DerivedData/Chameleon/2.2.0/Build/Intermediates/Chameleon.build/Release-iphoneos/Chameleon.build/Objects-normal/armv7/Chameleon-Swift.h -emit-dependencies-path /Users/George/Library/Caches/org.carthage.CarthageKit/DerivedData/Chameleon/2.2.0/Build/Intermediates/Chameleon.build/Release-iphoneos/Chameleon.build/Objects-normal/armv7/ChameleonShorthand.d -num-threads 4 -o /Users/George/Library/Caches/org.carthage.CarthageKit/DerivedData/Chameleon/2.2.0/Build/Intermediates/Chameleon.build/Release-iphoneos/Chameleon.build/Objects-normal/armv7/ChameleonShorthand.bc -resource-dir /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift
+<swift-imported-modules>
+Apple Swift version 3.1 (swiftlang-802.0.53 clang-802.0.42)
+/Users/George/Swifter/Carthage/Checkouts/Chameleon/Pod/Classes/Swift/ChameleonShorthand.swift
+ColorsFromImage
+ChameleonShorthand.swift
+/Users/George/Swifter/Carthage/Checkouts/Chameleon/Pod/Classes/Swift
+_TTSg5GSaCSo7UIColor_GSaS__s21_ObjectiveCBridgeable10Foundation___forceBridgeFromObjectiveC_bridgeable
+_TMaGSaCSo7UIColor_
+_TMaCSo7UIColor
+init
+ColorSchemeOf
+ComplementaryFlatColorOf
+HexColor
+GradientColor
+_TTSg5CSo7UIColor_P____TFs15_arrayForceCastu0_rFGSax_GSaq__
+_TMaP_
+_TTSg5GSaCSo7UIColor_GSaS__s10Collections_P____TFEsPs10Collection3mapurfzFzWx8Iterator7Element_qd__GSaqd___
+_TTSf4g_n___TTSg5GSaCSo7UIColor_GSaS__s10Collections_P____TFEsPs10Collection3mapurfzFzWx8Iterator7Element_qd__GSaqd___
+_TTSg5CSo7UIColor___TTWurGSax_s10CollectionsFS_g9subscriptFwx5IndexWx8Iterator7Element_
+_TTSg5CSo7UIColor___TFSag9subscriptFSix
+_TTSg5CSo7UIColor___TFSa15_checkSubscriptfTSi20wasNativeTypeCheckedSb_Vs16_DependenceToken
+_TTSg5CSo7UIColor___TFVs12_ArrayBuffer37_checkInoutAndNativeTypeCheckedBoundsfTSi20wasNativeTypeCheckedSb_T_
+_TTSg5CSo7UIColor___TFVs22_ContiguousArrayBuffer20_checkValidSubscriptfSiT_
+_TTSg5CSo7UIColor___TTWurGSax_s14_IndexableBasesFS_9formIndexfT5afterRwx5Index_T_
+_TTSg5CSo7UIColor___TFSa9formIndexfT5afterRSi_T_
+_TTSg5P____TFVs15ContiguousArray6appendfxT_
+_TTSg5P____TFVs15ContiguousArray36_reserveCapacityAssumingUniqueBufferfT8oldCountSi_T_
+_TTSg5P____TFVs15ContiguousArray37_appendElementAssumeUniqueAndCapacityfTSi10newElementx_T_
+_TTSg5P____TFSp10initializefT2tox5countSi_T_
+_TTSg5P____TFVs22_ContiguousArrayBufferg19firstElementAddressGSpx_
+_TTSg5P____TFVs22_ContiguousArrayBuffers5countSi
+_TTSg5P____TFVs22_ContiguousArrayBufferg8capacitySi
+_TTSg5P____TFVs15ContiguousArray9_getCountfT_Si
+_TTSg5P____TFVs22_ContiguousArrayBufferg5countSi
+_TTSg5P____TFVs15ContiguousArray40_makeUniqueAndReserveCapacityIfNotUniquefT_T_
+_TTSg5P____TFVs22_ContiguousArrayBuffer30isMutableAndUniquelyReferencedfT_Sb
+_TTSg5P____TFVs22_ContiguousArrayBuffer20isUniquelyReferencedfT_Sb
+_TTSg5CSo7UIColor___TFSa11_getElementfTSi20wasNativeTypeCheckedSb22matchingSubscriptCheckVs16_DependenceToken_x
+_TTSg5CSo7UIColor___TFVs12_ArrayBuffer10getElementfTSi20wasNativeTypeCheckedSb_x
+_TTSg5CSo7UIColor___TFVs22_ContiguousArrayBufferg9subscriptFSix
+_TTSg5CSo7UIColor___TFVs22_ContiguousArrayBuffer10getElementfSix
+_TTSg5CSo7UIColor___TFVs22_ContiguousArrayBufferg19firstElementAddressGSpx_
+_TTSg5CSo7UIColor___TFVs22_ContiguousArrayBufferg5countSi
+_TTSg5CSo7UIColor___TFVs12_ArrayBufferg7_nativeGVs22_ContiguousArrayBufferx_
+_TTSg5CSo7UIColor___TFSa29_hoistableIsNativeTypeCheckedfT_Sb
+_TTSg5CSo7UIColor___TFVs12_ArrayBufferg32arrayPropertyIsNativeTypeCheckedSb
+_TTSg5CSo7UIColor___TFVs12_ArrayBufferg20_isNativeTypeCheckedSb
+_TTSg5P____TFVs15ContiguousArray15reserveCapacityfSiT_
+_TTSg5P____TFVs22_ContiguousArrayBuffer13_copyContentsfT8subRangeGVs5RangeSi_12initializingGSpx__GSpx_
+_TTSg5P____TFSp10initializefT4fromGSPx_5countSi_T_
+_TTSg5GVs22_ContiguousArrayBufferP__GS_P__s22RandomAccessCollections___TFesRxs22RandomAccessCollectionwx5Indexs10Strideablewx7IndiceszGVs14CountableRangewxS0__WxS0_6Stride_zwx13IndexDistanceWxS2_S0__zwxS0_WxS2_S5__zwxS5_WxS2_7Indices_zGS3_wxS0__WxS2_8Iterator_zGVs16IndexingIteratorGS3_wxS0___WxS2_11SubSequence_zGS3_wxS0__WxS2_8_Element_zwxS0_WxS2_S6_S0__zwxS0_WxS2_S6_S5__zwxS5_WxS2_S6_S6__zGS3_wxS0__WxS2_S6_S7__zGS8_GS3_wxS0___WxS2_S6_S9__zGS3_wxS0__WxS2_S6_S10__zwxS0_WxS2_S7_7Element_zwxS0_WxS2_S9_S0__zwxS0_WxS2_S9_13IndexDistance_zwxS5_WxS2_S9_S6__zGS3_wxS0__WxS2_S9_S7__zGS8_GS3_wxS0___WxS2_S9_S9__zGS3_wxS0__WxS2_S9_S10__zwxS0_WxS2_S6_S6_S0__zwxS0_WxS2_S6_S6_S5__zwxS5_WxS2_S6_S6_S7__zGS8_GS3_wxS0___WxS2_S6_S6_S9__zGS3_wxS0__WxS2_S6_S6_S10__zwxS0_WxS2_S6_S7_S11__zwxS0_WxS2_S6_S9_S0__zwxS0_WxS2_S6_S9_S7__zGS8_GS3_wxS0___WxS2_S6_S9_S9__zGS3_wxS0__WxS2_S6_S9_S10__zwxS0_WxS2_S9_S6_S0__zwxS0_WxS2_S9_S6_S5__zwxS5_WxS2_S9_S6_S7__zGS8_GS3_wxS0___WxS2_S9_S6_S9__zGS3_wxS0__WxS2_S9_S6_S10__zwxS0_WxS2_S9_S7_S11__zwxS0_WxS2_S9_S9_S0__zwxS0_WxS2_S9_S9_S7__zGS8_GS3_wxS0___WxS2_S9_S9_S9__zGS3_wxS0__WxS2_S9_S9_S10__zwxS0_WxS2_S6_S6_S7_S11__zwxS0_WxS2_S6_S9_S7_S11__zwxS0_WxS2_S9_S6_S7_S11__zwxS0_WxS2_S9_S9_S7_S11__zwxS0_rS_g7indicesGS3_wxS0__
+_TTSg5P____TTWurGVs22_ContiguousArrayBufferx_s14_IndexableBasesFS0_g8endIndexwx5Index
+_TTSg5P____TFVs22_ContiguousArrayBufferg8endIndexSi
+_TTSg5P____TFVs22_ContiguousArrayBufferCfT19_uninitializedCountSi15minimumCapacitySi_GS_x_
+_TTSg5P____TFVs15ContiguousArrayg5countSi
+_TTSg5P____TFVs22_ContiguousArrayBuffer33requestUniqueMutableBackingBufferfT15minimumCapacitySi_GSqGS_x__
+_TTSg5P____TFVs15ContiguousArrayCfT_GS_x_
+_TTSg5P____TFVs22_ContiguousArrayBufferCfT_GS_x_
+_TTSg5CSo7UIColor___TTWurGSax_s10CollectionsFS_g5countwx13IndexDistance
+_TTSg5CSo7UIColor___TFSag5countSi
+_TTSg5CSo7UIColor___TFSa9_getCountfT_Si
+_TTSg5CSo7UIColor___TFVs12_ArrayBufferg5countSi
+_TTSg5CSo7UIColor___TFVs12_ArrayBufferg10_nonNativePs12_NSArrayCore_
+_TTSg5CSo7UIColor___TFVs12_ArrayBufferg9_isNativeSb
+_TTSf4n_n_n_d_n___TTSg5GVs22_ContiguousArrayBufferP__GS_P__s20_ArrayBufferProtocols_GVs14_IgnorePointerP__GS1_P__s16_PointerFunctions___TFEsPs20_ArrayBufferProtocol22_arrayOutOfPlaceUpdateuRd__s16_PointerFunctionwd__7Elementzwx7ElementrfTRGVs22_ContiguousArrayBufferwxS2__SiSiqd___T_
+_TTSg5P____TTWurGVs22_ContiguousArrayBufferx_s20_ArrayBufferProtocolsFS0_13_copyContentsfT8subRangeGVs5RangeSi_12initializingGSpwx7Element__GSpwxS2__
+_TTSg5P____TTWurGVs22_ContiguousArrayBufferx_s20_ArrayBufferProtocolsFS0_g8endIndexSi
+_TTSg5P____TFSp12deinitializefT5countSi_Sv
+_TTSg5P____TFSp14moveInitializefT4fromGSpx_5countSi_T_
+_TTSg5GSpP__GSpP__s10Comparables___TFsoi2geuRxs10ComparablerFTxx_Sb
+_TTSg5P____TTWurGSpx_s10ComparablesZFS_oi1lfTxx_Sb
+_TTSg5P____TZFSpoi1lfTGSpx_GSpx__Sb
+_TTSg5P____TTWurGVs22_ContiguousArrayBufferx_s20_ArrayBufferProtocolsFS0_g19firstElementAddressGSpwx7Element_
+_TTSg5P____TTWurGVs22_ContiguousArrayBufferx_s20_ArrayBufferProtocolsFS0_33requestUniqueMutableBackingBufferfT15minimumCapacitySi_GSqGS_wx7Element__
+_TTSg5P____TTWurGVs22_ContiguousArrayBufferx_s20_ArrayBufferProtocolsFS0_g5countSi
+_TTSf4n_n_d___TTSg5P____TFVs22_ContiguousArrayBufferCfT19_uninitializedCountSi15minimumCapacitySi_GS_x_
+_TTSg5P____TFVs22_ContiguousArrayBuffer18_initStorageHeaderfT5countSi8capacitySi_T_
+_TMaGCs23_ContiguousArrayStorageP__
+ContrastColorOf
+_TTSg5CSo7UIColor___TFVs12_ArrayBuffer19_getElementSlowPathfSiPs9AnyObject_
+_TTSr5CSo7UIColor_P____TFFs15_arrayForceCastu0_rFGSax_GSaq__U_Fxq_
+_TTSg5CSo7UIColor_P____TFFs15_arrayForceCastu0_rFGSax_GSaq__U_Fxq_
+_TTSg5GVs22_ContiguousArrayBufferP__GS_P__s20_ArrayBufferProtocols___TFEsPs20_ArrayBufferProtocol31_forceCreateUniqueMutableBufferfT17countForNewBufferSi14minNewCapacitySi_GVs22_ContiguousArrayBufferwx7Element_
+_TTSg5GVs22_ContiguousArrayBufferP__GS_P__s20_ArrayBufferProtocols___TFEsPs20_ArrayBufferProtocol35_forceCreateUniqueMutableBufferImplfT14countForBufferSi14minNewCapacitySi16requiredCapacitySi_GVs22_ContiguousArrayBufferwx7Element_
+_TTSg5P____TTWurGVs22_ContiguousArrayBufferx_s20_ArrayBufferProtocolsFS0_g8capacitySi
+_TTSg5P____TFVs15ContiguousArray16_copyToNewBufferfT8oldCountSi_T_
+_TTSg5GVs22_ContiguousArrayBufferP__GS_P__s20_ArrayBufferProtocols_GVs14_IgnorePointerP__GS1_P__s16_PointerFunctions___TFEsPs20_ArrayBufferProtocol22_arrayOutOfPlaceUpdateuRd__s16_PointerFunctionwd__7Elementzwx7ElementrfTRGVs22_ContiguousArrayBufferwxS2__SiSiqd___T_
+_TIF9Chameleon8HexColorFTSSV12CoreGraphics7CGFloat_CSo7UIColorA0_
+RandomFlatColorWithShade
+/Users/George/Library/Caches/org.carthage.CarthageKit/DerivedData/Chameleon/2.2.0/Build/Intermediates/Chameleon.build/Release-iphoneos/Chameleon.build/DerivedSources/Chameleon_vers.c
+__ZL15__ARCLite__loadv
+__ZL30add_image_hook_autoreleasepoolPK11mach_headerl
+__ZL34__arclite_objc_autoreleasePoolPushv
+__ZL33__arclite_objc_autoreleasePoolPopPv
+__ZL19patch_lazy_pointersPK11mach_headerP7patch_tm
+__ZL42__arclite_NSArray_objectAtIndexedSubscriptP7NSArrayP13objc_selectorj
+__ZL53__arclite_NSMutableArray_setObject_atIndexedSubscriptP14NSMutableArrayP13objc_selectorP11objc_objectj
+__ZL46__arclite_NSDictionary_objectForKeyedSubscriptP12NSDictionaryP13objc_selectorP11objc_object
+__ZL47__arclite_NSOrderedSet_objectAtIndexedSubscriptP12NSOrderedSetP13objc_selectorj
+__ZL58__arclite_NSMutableOrderedSet_setObject_atIndexedSubscriptP19NSMutableOrderedSetP13objc_selectorP11objc_objectj
+__ZL58__arclite_NSMutableDictionary__setObject_forKeyedSubscriptP19NSMutableDictionaryP13objc_selectorP11objc_objectS4_
+__ZL18add_image_hook_ARCPK11mach_headerl
+__ZL36__arclite_object_setInstanceVariableP11objc_objectPKcPv
+__ZL24__arclite_object_setIvarP11objc_objectP9objc_ivarS0_
+__ZL21__arclite_object_copyP11objc_objectm
+__ZL21__arclite_objc_retainP11objc_object
+__ZL26__arclite_objc_retainBlockP11objc_object
+__ZL22__arclite_objc_releaseP11objc_object
+__ZL26__arclite_objc_autoreleaseP11objc_object
+__ZL32__arclite_objc_retainAutoreleaseP11objc_object
+__ZL37__arclite_objc_autoreleaseReturnValueP11objc_object
+__ZL43__arclite_objc_retainAutoreleaseReturnValueP11objc_object
+__ZL44__arclite_objc_retainAutoreleasedReturnValueP11objc_object
+__ZL26__arclite_objc_storeStrongPP11objc_objectS0_
+__ZL22add_image_hook_swiftV1PK11mach_headerl
+__ZL42__arclite_NSUndoManagerProxy_isKindOfClassP11objc_objectP13objc_selectorP10objc_class
+__ZL13replaceMethodP10objc_classP13objc_selectorPFP11objc_objectS4_S2_zEPS6_
+__ZL30__arclite_NSManagedObject_initP11objc_objectP13objc_selector
+__ZL41__arclite_NSManagedObject_allocWithEntityP11objc_objectP13objc_selectorS0_
+__ZL36__arclite_NSManagedObject_allocBatchP11objc_objectP13objc_selectorPS0_S0_j
+__ZL37__arclite_NSKKMS_fastIndexForKnownKeyP11objc_objectP13objc_selectorS0_
+__ZL28__arclite_NSKKMS_indexForKeyP11objc_objectP13objc_selectorS0_
+__ZL29__arclite_NSKKsD_objectForKeyP11objc_objectP13objc_selectorS0_
+__ZL35__arclite_NSKKsD_removeObjectForKeyP11objc_objectP13objc_selectorS0_
+__ZL33__arclite_NSKKsD_setObject_forKeyP11objc_objectP13objc_selectorS0_S0_
+__ZL41__arclite_NSKKsD_addEntriesFromDictionaryP11objc_objectP13objc_selectorP12NSDictionary
+__ZL28__arclite_objc_readClassPairP10objc_classPK15objc_image_info
+__ZL32__arclite_objc_allocateClassPairP10objc_classPKcm
+__ZL32__arclite_object_getIndexedIvarsP11objc_object
+__ZL23__arclite_objc_getClassPKc
+__ZL27__arclite_objc_getMetaClassPKc
+__ZL31__arclite_objc_getRequiredClassPKc
+__ZL26__arclite_objc_lookUpClassPKc
+__ZL26__arclite_objc_getProtocolPKc
+__ZL23__arclite_class_getNameP10objc_class
+__ZL26__arclite_protocol_getNameP8Protocol
+__ZL37__arclite_objc_copyClassNamesForImagePKcPj
+__ZL17transcribeMethodsP10objc_classP15glue_class_ro_t
+__ZL19transcribeProtocolsP10objc_classP15glue_class_ro_t
+__ZL20transcribePropertiesP10objc_classP15glue_class_ro_t
+__ZL14initialize_impP11objc_objectP13objc_selector
+__ZL18allocateMaybeSwiftP18glue_swift_class_tm
+__ZL22copySwiftV1MangledNamePKcb
+__ZL13demangledNamePKcb
+__ZL16scanMangledFieldRPKcS0_S1_Ri
+__ZL30arclite_uninitialized_functionv
+__ZL12cxxConstructP11objc_object
+__ZL20fixStringForCoreDataP11objc_object
+_OBJC_METACLASS_$___ARCLite__
+__ZL24OBJC_CLASS_$___ARCLite__
+__ZL31OBJC_METACLASS_RO_$___ARCLite__
+__non_lazy_classes
+__ZL27OBJC_CLASS_RO_$___ARCLite__
+__ZL11_class_name
+__ZL32OBJC_$_CLASS_METHODS___ARCLite__
+__ZL17_load_method_name
+__ZL17_load_method_type
+__ZL23NSAutoreleasePool_class
+__ZZL30add_image_hook_autoreleasepoolPK11mach_headerlE7patches
+__ZGVZL30add_image_hook_autoreleasepoolPK11mach_headerlE7patches
+l_OBJC_PROTOCOL_$___ARCLiteIndexedSubscripting__
+l_OBJC_LABEL_PROTOCOL_$___ARCLiteIndexedSubscripting__
+l_OBJC_PROTOCOL_REFERENCE_$___ARCLiteIndexedSubscripting__
+l_OBJC_PROTOCOL_$___ARCLiteKeyedSubscripting__
+l_OBJC_LABEL_PROTOCOL_$___ARCLiteKeyedSubscripting__
+l_OBJC_PROTOCOL_REFERENCE_$___ARCLiteKeyedSubscripting__
+__ZZL18add_image_hook_ARCPK11mach_headerlE7patches
+__ZGVZL18add_image_hook_ARCPK11mach_headerlE7patches
+__ZL30NSUndoManagerProxy_targetClass
+__ZL29original_NSManagedObject_init
+__ZL40original_NSManagedObject_allocWithEntity
+__ZL35original_NSManagedObject_allocBatch
+__ZL25NSMutableDictionary_class
+__ZL22NSConstantString_class
+__ZL14NSString_class
+__ZL36original_NSKKMS_fastIndexForKnownKey
+__ZL27original_NSKKMS_indexForKey
+__ZL28original_NSKKsD_objectForKey
+__ZL34original_NSKKsD_removeObjectForKey
+__ZL32original_NSKKsD_setObject_forKey
+__ZL40original_NSKKsD_addEntriesFromDictionary
+__ZZL22add_image_hook_swiftV1PK11mach_headerlE7patches
+__ZGVZL22add_image_hook_swiftV1PK11mach_headerlE7patches
+__ZL31original_objc_allocateClassPair
+__ZL31original_object_getIndexedIvars
+__ZL22original_objc_getClass
+__ZL26original_objc_getMetaClass
+__ZL30original_objc_getRequiredClass
+__ZL25original_objc_lookUpClass
+__ZL25original_objc_getProtocol
+__ZL22original_class_getName
+__ZL25original_protocol_getName
+__ZL36original_objc_copyClassNamesForImage
+__ZL12demangleLock
+__ZL9Demangled
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c++ -arch armv7 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=c++11 -Wno-trigraphs -fno-exceptions -fno-rtti -mpascal-strings -Os -Wno-missing-field-initializers -Wmissing-prototypes -Wno-implicit-atomic-properties -Wno-arc-repeated-use-of-weak -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wshorten-64-to-32 -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -Wno-c++11-extensions -D NDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.Internal.sdk -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -Winvalid-offsetof -miphoneos-version-min=4.3 -g -fno-threadsafe-statics -Wno-sign-conversion -Wno-infinite-recursion -Wno-move -fembed-bitcode=all -iquote /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-66~534/TempContent/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-generated-files.hmap -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-66~534/TempContent/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-own-target-headers.hmap -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-66~534/TempContent/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-all-target-headers.hmap -iquote /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-66~534/TempContent/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-project-headers.hmap -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-66~534/Symbols/BuiltProducts/include -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-66~534/TempContent/Objects/arclite.build/arclite_iOS.build/DerivedSources/armv7 -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-66~534/TempContent/Objects/arclite.build/arclite_iOS.build/DerivedSources -F/Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-66~534/Symbols/BuiltProducts -F/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.Internal.sdk/System/Library/PrivateFrameworks -Wall -Wextra -Wno-gcc-compat -Wno-error=incomplete-umbrella -Wno-error=incomplete-umbrella -MMD -MT dependencies -MF /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-66~534/TempContent/Objects/arclite.build/arclite_iOS.build/Objects-normal/armv7/arclite.d --serialize-diagnostics /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-66~534/TempContent/Objects/arclite.build/arclite_iOS.build/Objects-normal/armv7/arclite.dia -c /Library/Caches/com.apple.xbs/Sources/arclite_iOS/arclite-66/source/arclite.mm -o /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-66~534/TempContent/Objects/arclite.build/arclite_iOS.build/Objects-normal/armv7/arclite.o -mlinker-version=278.4 -march=armv7a
+/Library/Caches/com.apple.xbs/Sources/arclite_iOS/arclite-66/source/arclite.mm
+/Library/Caches/com.apple.xbs/Sources/arclite_iOS/arclite-66
+fixStringForCoreData
+cxxConstruct
+arclite_uninitialized_function
+scanMangledField
+isdigit
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.Internal.sdk/usr/include/ctype.h
+__isctype
+demangledName
+copySwiftV1DemangledName
+copySwiftV1MangledName
+allocateMaybeSwift
+word_align
+isSwift
+initialize_imp
+transcribeProperties
+property_list_nth
+transcribeProtocols
+transcribeMethods
+data
+method_list_nth
+__arclite_objc_copyClassNamesForImage
+__arclite_protocol_getName
+__arclite_class_getName
+__arclite_objc_getProtocol
+__arclite_objc_lookUpClass
+__arclite_objc_getRequiredClass
+__arclite_objc_getMetaClass
+__arclite_objc_getClass
+__arclite_object_getIndexedIvars
+__arclite_objc_allocateClassPair
+metaclass
+__arclite_objc_readClassPair
+transcribeIvars
+ivar_list_nth
+max
+alignment
+ro
+fastFlags
+__arclite_NSKKsD_addEntriesFromDictionary
+__arclite_NSKKsD_setObject_forKey
+__arclite_NSKKsD_removeObjectForKey
+__arclite_NSKKsD_objectForKey
+__arclite_NSKKMS_indexForKey
+__arclite_NSKKMS_fastIndexForKnownKey
+__arclite_NSManagedObject_allocBatch
+__arclite_NSManagedObject_allocWithEntity
+__arclite_NSManagedObject_init
+replaceMethod
+__arclite_NSUndoManagerProxy_isKindOfClass
+add_image_hook_swiftV1
+patch_t<const char **(const char *, unsigned int *)>
+patch_t<const char *(Protocol *)>
+patch_t<const char *(Class)>
+patch_t<Protocol *(const char *)>
+patch_t<Class (const char *)>
+patch_t<void *(id)>
+patch_t<Class (Class, const char *, unsigned long)>
+patch_t<Class (Class, const objc_image_info *)>
+__arclite_objc_storeStrong
+__arclite_objc_release
+__arclite_objc_retain
+__arclite_objc_retainAutoreleasedReturnValue
+__arclite_objc_retainAutoreleaseReturnValue
+__arclite_objc_autoreleaseReturnValue
+__arclite_objc_retainAutorelease
+__arclite_objc_autorelease
+__arclite_objc_retainBlock
+__arclite_object_copy
+fixupCopiedReferences
+_class_getInstanceStart
+alignedInstanceStart
+__arclite_class_usesAutomaticRetainRelease
+classOrSuperClassesUseARR
+__arclite_object_setIvar
+isScannedOffset
+_ivar_getClass
+__arclite_object_setInstanceVariable
+add_image_hook_ARC
+patch_t<void (id *, id)>
+patch_t<id (id)>
+patch_t<void (id)>
+patch_t<id (id, unsigned long)>
+patch_t<void (id, objc_ivar *, id)>
+patch_t<objc_ivar *(id, const char *, void *)>
+__arclite_NSMutableDictionary__setObject_forKeyedSubscript
+__arclite_NSMutableOrderedSet_setObject_atIndexedSubscript
+__arclite_NSOrderedSet_objectAtIndexedSubscript
+__arclite_NSDictionary_objectForKeyedSubscript
+__arclite_NSMutableArray_setObject_atIndexedSubscript
+__arclite_NSArray_objectAtIndexedSubscript
+patch_lazy_pointers
+__arclite_objc_autoreleasePoolPop
+__arclite_objc_autoreleasePoolPush
+add_image_hook_autoreleasepool
+patch_t<void (void *)>
+patch_t<void *()>
+__ARCLite__load
+install_swiftV1
+install_ARC
+install_dict_nil_value
+addOrReplaceMethod
+keyedGetter
+install_subscripting
+addMethod
+indexedGetter
+install_autoreleasepool

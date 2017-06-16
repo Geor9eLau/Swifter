@@ -7,13 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E36D7121EF3C2BE00038D0D /* GLBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E36D7111EF3C2BE00038D0D /* GLBaseViewController.swift */; };
+		5E36D7161EF3C42F00038D0D /* GLHomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E36D7151EF3C42F00038D0D /* GLHomePageViewController.swift */; };
+		5E36D7181EF3C56D00038D0D /* GLRoomCreaterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E36D7171EF3C56D00038D0D /* GLRoomCreaterViewController.swift */; };
+		5E36D71A1EF3C61F00038D0D /* GLRoomListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E36D7191EF3C61F00038D0D /* GLRoomListViewController.swift */; };
+		5E36D71C1EF3C76C00038D0D /* GLGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E36D71B1EF3C76C00038D0D /* GLGameViewController.swift */; };
+		5E36D71E1EF3C82D00038D0D /* GLPlayerInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E36D71D1EF3C82D00038D0D /* GLPlayerInfoCell.swift */; };
+		5E36D7201EF3C95E00038D0D /* GLRoomInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E36D71F1EF3C95E00038D0D /* GLRoomInfoCell.swift */; };
 		5E47A51F1EF25D9500FC83C2 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E47A51E1EF25D9500FC83C2 /* Player.swift */; };
 		5E47A5211EF2756B00FC83C2 /* GLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E47A5201EF2756B00FC83C2 /* GLError.swift */; };
 		5E47A5231EF2850300FC83C2 /* GLDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E47A5221EF2850300FC83C2 /* GLDataManager.swift */; };
 		5EAD63231EF13D4000EBF944 /* GLCentralManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAD63221EF13D4000EBF944 /* GLCentralManager.swift */; };
+		5EB20F6D1EF3C091003A22CE /* Chameleon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ED0DB411EF3BA15000A2E9B /* Chameleon.framework */; };
 		5ED867C11EF219C300F58AC1 /* GLPeripheralManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED867C01EF219C300F58AC1 /* GLPeripheralManager.swift */; };
 		5EED44E71EF12DB7006F7C2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EED44E61EF12DB7006F7C2F /* AppDelegate.swift */; };
-		5EED44E91EF12DB7006F7C2F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EED44E81EF12DB7006F7C2F /* ViewController.swift */; };
 		5EED44EC1EF12DB7006F7C2F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EED44EA1EF12DB7006F7C2F /* Main.storyboard */; };
 		5EED44EE1EF12DB7006F7C2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EED44ED1EF12DB7006F7C2F /* Assets.xcassets */; };
 		5EED44F11EF12DB7006F7C2F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EED44EF1EF12DB7006F7C2F /* LaunchScreen.storyboard */; };
@@ -39,14 +46,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5E36D7111EF3C2BE00038D0D /* GLBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GLBaseViewController.swift; sourceTree = "<group>"; };
+		5E36D7151EF3C42F00038D0D /* GLHomePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GLHomePageViewController.swift; path = ../GLHomePageViewController.swift; sourceTree = "<group>"; };
+		5E36D7171EF3C56D00038D0D /* GLRoomCreaterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GLRoomCreaterViewController.swift; sourceTree = "<group>"; };
+		5E36D7191EF3C61F00038D0D /* GLRoomListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GLRoomListViewController.swift; sourceTree = "<group>"; };
+		5E36D71B1EF3C76C00038D0D /* GLGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GLGameViewController.swift; sourceTree = "<group>"; };
+		5E36D71D1EF3C82D00038D0D /* GLPlayerInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GLPlayerInfoCell.swift; sourceTree = "<group>"; };
+		5E36D71F1EF3C95E00038D0D /* GLRoomInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GLRoomInfoCell.swift; sourceTree = "<group>"; };
 		5E47A51E1EF25D9500FC83C2 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		5E47A5201EF2756B00FC83C2 /* GLError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLError.swift; sourceTree = "<group>"; };
 		5E47A5221EF2850300FC83C2 /* GLDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLDataManager.swift; sourceTree = "<group>"; };
 		5EAD63221EF13D4000EBF944 /* GLCentralManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLCentralManager.swift; sourceTree = "<group>"; };
+		5ED0DB411EF3BA15000A2E9B /* Chameleon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Chameleon.framework; path = Carthage/Build/iOS/Chameleon.framework; sourceTree = "<group>"; };
 		5ED867C01EF219C300F58AC1 /* GLPeripheralManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLPeripheralManager.swift; sourceTree = "<group>"; };
 		5EED44E31EF12DB7006F7C2F /* Swifter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swifter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EED44E61EF12DB7006F7C2F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5EED44E81EF12DB7006F7C2F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		5EED44EB1EF12DB7006F7C2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5EED44ED1EF12DB7006F7C2F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5EED44F01EF12DB7006F7C2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -64,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EB20F6D1EF3C091003A22CE /* Chameleon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +99,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5E36D7131EF3C3EF00038D0D /* Data Transport Layer */ = {
+			isa = PBXGroup;
+			children = (
+				5E47A5201EF2756B00FC83C2 /* GLError.swift */,
+				5EAD63221EF13D4000EBF944 /* GLCentralManager.swift */,
+				5ED867C01EF219C300F58AC1 /* GLPeripheralManager.swift */,
+			);
+			name = "Data Transport Layer";
+			sourceTree = "<group>";
+		};
+		5E36D7141EF3C40A00038D0D /* Data Handler */ = {
+			isa = PBXGroup;
+			children = (
+				5E47A5221EF2850300FC83C2 /* GLDataManager.swift */,
+			);
+			name = "Data Handler";
+			sourceTree = "<group>";
+		};
+		5ED0DB3D1EF3B829000A2E9B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5ED0DB411EF3BA15000A2E9B /* Chameleon.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		5EED44DA1EF12DB7006F7C2F = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +132,7 @@
 				5EED44FA1EF12DB7006F7C2F /* SwifterTests */,
 				5EED45051EF12DB7006F7C2F /* SwifterUITests */,
 				5EED44E41EF12DB7006F7C2F /* Products */,
+				5ED0DB3D1EF3B829000A2E9B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -108,11 +150,15 @@
 			isa = PBXGroup;
 			children = (
 				5EED44E61EF12DB7006F7C2F /* AppDelegate.swift */,
-				5EED44E81EF12DB7006F7C2F /* ViewController.swift */,
-				5EAD63221EF13D4000EBF944 /* GLCentralManager.swift */,
-				5ED867C01EF219C300F58AC1 /* GLPeripheralManager.swift */,
-				5E47A5201EF2756B00FC83C2 /* GLError.swift */,
-				5E47A5221EF2850300FC83C2 /* GLDataManager.swift */,
+				5E36D7151EF3C42F00038D0D /* GLHomePageViewController.swift */,
+				5E36D7171EF3C56D00038D0D /* GLRoomCreaterViewController.swift */,
+				5E36D71D1EF3C82D00038D0D /* GLPlayerInfoCell.swift */,
+				5E36D71F1EF3C95E00038D0D /* GLRoomInfoCell.swift */,
+				5E36D7191EF3C61F00038D0D /* GLRoomListViewController.swift */,
+				5E36D71B1EF3C76C00038D0D /* GLGameViewController.swift */,
+				5E36D7111EF3C2BE00038D0D /* GLBaseViewController.swift */,
+				5E36D7131EF3C3EF00038D0D /* Data Transport Layer */,
+				5E36D7141EF3C40A00038D0D /* Data Handler */,
 				5E47A51E1EF25D9500FC83C2 /* Player.swift */,
 				5EED44EA1EF12DB7006F7C2F /* Main.storyboard */,
 				5EED44ED1EF12DB7006F7C2F /* Assets.xcassets */,
@@ -150,6 +196,7 @@
 				5EED44DF1EF12DB7006F7C2F /* Sources */,
 				5EED44E01EF12DB7006F7C2F /* Frameworks */,
 				5EED44E11EF12DB7006F7C2F /* Resources */,
+				5ED0DB401EF3B832000A2E9B /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -266,16 +313,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		5ED0DB401EF3B832000A2E9B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Chameleon.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		5EED44DF1EF12DB7006F7C2F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5EED44E91EF12DB7006F7C2F /* ViewController.swift in Sources */,
+				5E36D7201EF3C95E00038D0D /* GLRoomInfoCell.swift in Sources */,
 				5EED44E71EF12DB7006F7C2F /* AppDelegate.swift in Sources */,
+				5E36D7121EF3C2BE00038D0D /* GLBaseViewController.swift in Sources */,
 				5ED867C11EF219C300F58AC1 /* GLPeripheralManager.swift in Sources */,
 				5E47A5211EF2756B00FC83C2 /* GLError.swift in Sources */,
+				5E36D7181EF3C56D00038D0D /* GLRoomCreaterViewController.swift in Sources */,
 				5E47A51F1EF25D9500FC83C2 /* Player.swift in Sources */,
+				5E36D7161EF3C42F00038D0D /* GLHomePageViewController.swift in Sources */,
+				5E36D71E1EF3C82D00038D0D /* GLPlayerInfoCell.swift in Sources */,
+				5E36D71A1EF3C61F00038D0D /* GLRoomListViewController.swift in Sources */,
+				5E36D71C1EF3C76C00038D0D /* GLGameViewController.swift in Sources */,
 				5EAD63231EF13D4000EBF944 /* GLCentralManager.swift in Sources */,
 				5E47A5231EF2850300FC83C2 /* GLDataManager.swift in Sources */,
 			);
@@ -352,6 +422,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
@@ -378,7 +450,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -407,6 +479,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
@@ -427,7 +501,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -440,11 +514,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = AR39NS83R8;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Swifter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = SZU.Swifter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -454,11 +532,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = AR39NS83R8;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Swifter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = SZU.Swifter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
