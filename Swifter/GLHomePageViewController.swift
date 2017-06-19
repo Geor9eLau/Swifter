@@ -10,10 +10,34 @@ import Foundation
 import UIKit
 
 class GLHomePageViewController: GLBaseViewController {
+    let createRoomSegueIdentifier = "CreateRoom"
+    let joinGameSegueIdentifier = "JoinGame"
+    
+    
+    override func performSegue(withIdentifier identifier: String, sender: Any?) {
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == createRoomSegueIdentifier {
+            if let createRoomVc = segue.destination as? GLRoomCreaterViewController {
+                createRoomVc.isRoomCreater = true
+            }
+        }
+    }
+    
+    
+    
+}
+
+
+// MARK: - Life cycle
+extension GLHomePageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(true, animated: true)
@@ -22,5 +46,4 @@ class GLHomePageViewController: GLBaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
-    
 }
