@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import Chameleon
+//import Chameleon
 
 
 class GLBaseViewController: UIViewController {
@@ -21,7 +21,7 @@ class GLBaseViewController: UIViewController {
 // MARK: - Life cycle
 extension GLBaseViewController {
     override func viewDidLoad() {
-        view.backgroundColor = UIColor.flatWhite()
+//        view.backgroundColor = UIColor.flatWhite()
     }
     
     override func viewWillAppear(_ animated: Bool) {

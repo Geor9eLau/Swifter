@@ -14,7 +14,7 @@ class GLDataManager: NSObject {
        return GLDataManager()
     }()
     
-    override private init() {
+     override init() {
         super.init()
     }
 }

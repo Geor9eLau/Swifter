@@ -17,6 +17,8 @@ let GameSwitchCharacteristicUUIDString = "A853EEBC-481C-43AA-8589-515B196E7EB6"
 protocol GLCentralManagerDelegate: class {
     func centralManager(_ manager: GLCentralManager, update playerData: Data)
     func centralManager(_ manager: GLCentralManager, didFail error: GLError)
+    func centralManager(_ manager: GLCentralManager, didDiscoverPeripheral peripheralNameInfo: [String])
+    func centralManagerDidConectedToTarget(_ manager: GLCentralManager)
 }
 
 class GLCentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
@@ -31,12 +33,15 @@ class GLCentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
     fileprivate var connectedPeripheral: CBPeripheral?
     fileprivate var gameSwitchCharacteristic: CBCharacteristic?
     fileprivate var playerDataCharacteristic: CBCharacteristic?
-    fileprivate override init() {
+    override init() {
         super.init()
         manager = CBCentralManager(delegate: self, queue: queue)
     }
     
     weak var delegate: GLCentralManagerDelegate?
+    
+    var discoveredPeripheralNameInfo: [String] = []
+    
     var discoveredPeripherals: [CBPeripheral] {
         if let validPlayerDataUUID = playerDataUUID,
             let vaildGameSwitchUUID = gameSwitchUUID{
@@ -125,7 +130,13 @@ extension GLCentralManager{
     }
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        
+        if let name = advertisementData[CBAdvertisementDataLocalNameKey] as? String,
+            let validDelegate = delegate{
+            if discoveredPeripheralNameInfo.contains(name) == false {
+                discoveredPeripheralNameInfo.append(name)
+                validDelegate.centralManager(self, didDiscoverPeripheral: discoveredPeripheralNameInfo)
+            }
+        }
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
@@ -136,14 +147,14 @@ extension GLCentralManager{
     }
     
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        if let vaildDelegate = delegate {
-            vaildDelegate.centralManager(self, didFail: .disconnect)
+        if let validDelegate = delegate {
+            validDelegate.centralManager(self, didFail: .disconnect)
         }
     }
     
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
-        if let vaildDelegate = delegate {
-            vaildDelegate.centralManager(self, didFail: .failToConnect)
+        if let validDelegate = delegate {
+            validDelegate.centralManager(self, didFail: .failToConnect)
         }
     }
 }

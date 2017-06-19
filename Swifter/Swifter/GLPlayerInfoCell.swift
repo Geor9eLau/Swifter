@@ -18,6 +18,6 @@ class GLPlayerInfoCell: UICollectionViewCell {
     
     
     override func awakeFromNib() {
-        avatar.backgroundColor = UIColor.init(randomFlatColorOf: .dark)
+//        avatar.backgroundColor = UIColor.init(randomFlatColorOf: .dark)
     }
 }

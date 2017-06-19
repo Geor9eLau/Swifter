@@ -8,11 +8,12 @@
 
 import Foundation
 import CoreBluetooth
-
+import UIKit
 
 protocol GLPeripheralManagerDelegate: class {
     func peripheralManager(_ manager: GLPeripheralManager, update playerData: Data)
     func peripheralManager(_ manager: GLPeripheralManager, didFail error: GLError)
+    func peripheralManager(_ manager: GLPeripheralManager, didGetNewSubscriber subscriberCount: Int)
 }
 
 class GLPeripheralManager: NSObject, CBPeripheralManagerDelegate {
@@ -54,7 +55,7 @@ extension GLPeripheralManager {
 extension GLPeripheralManager {
     func startAdvertising() {
         if manager.state == .poweredOn{
-            manager.startAdvertising([CBAdvertisementDataLocalNameKey: "George", CBAdvertisementDataServiceUUIDsKey: [CBUUID(string: PlayerDataServiceUUIDString), CBUUID(string: GameSwitchServiceUUIDString)]])
+            manager.startAdvertising([CBAdvertisementDataLocalNameKey: UIDevice.current.name, CBAdvertisementDataServiceUUIDsKey: [CBUUID(string: PlayerDataServiceUUIDString), CBUUID(string: GameSwitchServiceUUIDString)]])
         }
     }
     
@@ -99,8 +100,11 @@ extension GLPeripheralManager {
     
     
     func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didSubscribeTo characteristic: CBCharacteristic) {
-        if subscribedCenteral.contains(central) == false {
+        if subscribedCenteral.contains(central) == false,
+            let validDelegate = delegate
+           {
             subscribedCenteral.append(central)
+            validDelegate.peripheralManager(self, didGetNewSubscriber: subscribedCenteral.count)
         }
     }
     

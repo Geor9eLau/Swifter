@@ -17,7 +17,7 @@
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -43,7 +43,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="rSv-xz-Z22" kind="show" id="mpK-aI-8po"/>
+                                    <segue destination="rSv-xz-Z22" kind="show" identifier="CreatRoom" id="mpK-aI-8po"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dly-df-Bkb">
@@ -58,7 +58,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="RyM-be-DRe" kind="show" id="ksy-KA-xSj"/>
+                                    <segue destination="RyM-be-DRe" kind="show" identifier="JoinGame" id="ksy-KA-xSj"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -98,7 +98,7 @@
                                         <rect key="frame" x="0.0" y="1" width="375" height="140"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TRI-Gw-iJX" id="h64-uP-18P">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="139"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="140"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GameX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P9s-6i-Pg6">
@@ -152,6 +152,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Room List" id="65t-DY-lWe"/>
+                    <connections>
+                        <outlet property="tableView" destination="bNS-XI-Cnt" id="jtU-sf-z6P"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rZO-Fu-SVg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -249,6 +252,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="My Room" id="vyE-kF-IQK"/>
                     <connections>
+                        <outlet property="collectionView" destination="x5N-7U-uLw" id="CPE-ZP-XVZ"/>
                         <outlet property="launchGameButton" destination="DXW-NA-LEz" id="S9n-HA-ubk"/>
                     </connections>
                 </viewController>
@@ -272,11 +276,11 @@
                                 <rect key="frame" x="0.0" y="587" width="375" height="80"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QH8-NJ-Lve">
-                                        <rect key="frame" x="0.0" y="0.0" width="188" height="80"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="187.5" height="80"/>
                                         <color key="backgroundColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QIF-ao-o3r">
-                                        <rect key="frame" x="188" y="0.0" width="187" height="80"/>
+                                        <rect key="frame" x="187.5" y="0.0" width="187.5" height="80"/>
                                         <color key="backgroundColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                     </button>
                                 </subviews>
@@ -324,6 +328,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="mpK-aI-8po"/>
+        <segue reference="v9b-Fz-hmu"/>
     </inferredMetricsTieBreakers>
 </document>

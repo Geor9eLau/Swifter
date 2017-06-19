@@ -17,6 +17,6 @@ class GLRoomInfoCell: UITableViewCell {
     @IBOutlet weak var roomCreaterLbl: UILabel!
     
     override func awakeFromNib() {
-        contentView.backgroundColor = UIColor.randomFlat()
+//        contentView.backgroundColor = UIColor.randomFlat()
     }
 }
