@@ -10,20 +10,33 @@ import Foundation
 import UIKit
 import CoreBluetooth
 
-class GLRoomListViewController: GLBaseViewController, UITableViewDelegate, UITableViewDataSource, GLCentralManagerDelegate {
+class GLRoomListViewController: GLBaseViewController, UITableViewDelegate, UITableViewDataSource {
     
     
     @IBOutlet weak var tableView: UITableView!
-    let centralManager = GLCentralManager()
+    let centralManager = GLCentralManager.default
     
     fileprivate var dataSource: [String] = []
     fileprivate var isConnectedToRoomCreater: Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
         centralManager.startScan()
+        
+        NotificationCenter.default.addObserver(forName: NotificationCentralDidDiscoverPeripheral, object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+            if let info = notification.userInfo,
+                let roomCreaterName = info[NotificationCentralDidDiscoverPeripheralKey] as? String{
+                self?.dataSource.append(roomCreaterName)
+                self?.tableView.reloadData()
+            }
+        }
+        
+        
+        
     }
     
-    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NotificationCentralDidDiscoverPeripheral, object: nil)
+    }
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         return isConnectedToRoomCreater
     }
@@ -33,26 +46,6 @@ class GLRoomListViewController: GLBaseViewController, UITableViewDelegate, UITab
 //MARK: - Life Cycle
 extension GLRoomCreaterViewController {
     
-}
-
-// MARK: - GLCentralManagerDelegate
-extension GLRoomListViewController {
-    func centralManager(_ manager: GLCentralManager, update playerData: Data) {
-        
-    }
-    
-    func centralManager(_ manager: GLCentralManager, didFail error: GLError) {
-        
-    }
-    
-    func centralManager(_ manager: GLCentralManager, didDiscoverPeripheral peripheralNameInfo: [String]) {
-        dataSource.removeAll()
-        dataSource.append(contentsOf: peripheralNameInfo)
-    }
-    
-    func centralManagerDidConectedToTarget(_ manager: GLCentralManager) {
-        isConnectedToRoomCreater = true
-    }
 }
 
 

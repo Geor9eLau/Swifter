@@ -10,13 +10,14 @@ import Foundation
 import UIKit
 
 
-class GLRoomCreaterViewController: GLBaseViewController, UICollectionViewDelegate, UICollectionViewDataSource, GLPeripheralManagerDelegate {
+class GLRoomCreaterViewController: GLBaseViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var launchGameButton: UIButton!
     
     
     var isRoomCreater: Bool = false
+    fileprivate var centralManager: GLCentralManager?
     fileprivate var peripheralManager: GLPeripheralManager?
     fileprivate var playerCount: Int = 1
 }
@@ -27,28 +28,14 @@ extension GLRoomCreaterViewController {
     override func viewDidLoad() {
         if isRoomCreater {
             peripheralManager = GLPeripheralManager.default
-            peripheralManager?.delegate = self
             peripheralManager?.startAdvertising()
+        } else {
+            centralManager = GLCentralManager.default
+            
         }
     }
 }
 
-
-// MARK: - GLPeripheralManagerDelegate
-extension GLRoomCreaterViewController {
-    func peripheralManager(_ manager: GLPeripheralManager, update playerData: Data) {
-        
-    }
-    
-    func peripheralManager(_ manager: GLPeripheralManager, didFail error: GLError) {
-        
-    }
-    
-    func peripheralManager(_ manager: GLPeripheralManager, didGetNewSubscriber subscriberCount: Int) {
-        playerCount = 1 + subscriberCount
-        collectionView.reloadData()
-    }
-}
 
 
 // MARK: - UICollectionViewDataSource

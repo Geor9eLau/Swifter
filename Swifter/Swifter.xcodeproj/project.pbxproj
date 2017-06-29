@@ -14,9 +14,10 @@
 		5E36D71C1EF3C76C00038D0D /* GLGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E36D71B1EF3C76C00038D0D /* GLGameViewController.swift */; };
 		5E36D71E1EF3C82D00038D0D /* GLPlayerInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E36D71D1EF3C82D00038D0D /* GLPlayerInfoCell.swift */; };
 		5E36D7201EF3C95E00038D0D /* GLRoomInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E36D71F1EF3C95E00038D0D /* GLRoomInfoCell.swift */; };
-		5E47A51F1EF25D9500FC83C2 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E47A51E1EF25D9500FC83C2 /* Player.swift */; };
 		5E47A5211EF2756B00FC83C2 /* GLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E47A5201EF2756B00FC83C2 /* GLError.swift */; };
-		5E47A5231EF2850300FC83C2 /* GLDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E47A5221EF2850300FC83C2 /* GLDataManager.swift */; };
+		5E7C5A631F04D5A1005050ED /* GLNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C5A621F04D5A1005050ED /* GLNotification.swift */; };
+		5E7C5A691F04DFA9005050ED /* GLPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C5A681F04DFA9005050ED /* GLPlayer.swift */; };
+		5E7C5A6B1F04E1D3005050ED /* HandyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E7C5A6A1F04E1D3005050ED /* HandyJSON.framework */; };
 		5EAD63231EF13D4000EBF944 /* GLCentralManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAD63221EF13D4000EBF944 /* GLCentralManager.swift */; };
 		5EB20F6D1EF3C091003A22CE /* Chameleon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ED0DB411EF3BA15000A2E9B /* Chameleon.framework */; };
 		5ED867C11EF219C300F58AC1 /* GLPeripheralManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED867C01EF219C300F58AC1 /* GLPeripheralManager.swift */; };
@@ -53,9 +54,10 @@
 		5E36D71B1EF3C76C00038D0D /* GLGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GLGameViewController.swift; sourceTree = "<group>"; };
 		5E36D71D1EF3C82D00038D0D /* GLPlayerInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GLPlayerInfoCell.swift; sourceTree = "<group>"; };
 		5E36D71F1EF3C95E00038D0D /* GLRoomInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GLRoomInfoCell.swift; sourceTree = "<group>"; };
-		5E47A51E1EF25D9500FC83C2 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		5E47A5201EF2756B00FC83C2 /* GLError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLError.swift; sourceTree = "<group>"; };
-		5E47A5221EF2850300FC83C2 /* GLDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLDataManager.swift; sourceTree = "<group>"; };
+		5E7C5A621F04D5A1005050ED /* GLNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GLNotification.swift; sourceTree = "<group>"; };
+		5E7C5A681F04DFA9005050ED /* GLPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GLPlayer.swift; sourceTree = "<group>"; };
+		5E7C5A6A1F04E1D3005050ED /* HandyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HandyJSON.framework; path = Carthage/Build/iOS/HandyJSON.framework; sourceTree = "<group>"; };
 		5EAD63221EF13D4000EBF944 /* GLCentralManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLCentralManager.swift; sourceTree = "<group>"; };
 		5ED0DB411EF3BA15000A2E9B /* Chameleon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Chameleon.framework; path = Carthage/Build/iOS/Chameleon.framework; sourceTree = "<group>"; };
 		5ED867C01EF219C300F58AC1 /* GLPeripheralManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLPeripheralManager.swift; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E7C5A6B1F04E1D3005050ED /* HandyJSON.framework in Frameworks */,
 				5EB20F6D1EF3C091003A22CE /* Chameleon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -109,17 +112,18 @@
 			name = "Data Transport Layer";
 			sourceTree = "<group>";
 		};
-		5E36D7141EF3C40A00038D0D /* Data Handler */ = {
+		5E36D7141EF3C40A00038D0D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				5E47A5221EF2850300FC83C2 /* GLDataManager.swift */,
+				5E7C5A681F04DFA9005050ED /* GLPlayer.swift */,
 			);
-			name = "Data Handler";
+			name = Model;
 			sourceTree = "<group>";
 		};
 		5ED0DB3D1EF3B829000A2E9B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5E7C5A6A1F04E1D3005050ED /* HandyJSON.framework */,
 				5ED0DB411EF3BA15000A2E9B /* Chameleon.framework */,
 			);
 			name = Frameworks;
@@ -152,14 +156,14 @@
 				5EED44E61EF12DB7006F7C2F /* AppDelegate.swift */,
 				5E36D7151EF3C42F00038D0D /* GLHomePageViewController.swift */,
 				5E36D7171EF3C56D00038D0D /* GLRoomCreaterViewController.swift */,
+				5E7C5A621F04D5A1005050ED /* GLNotification.swift */,
 				5E36D71D1EF3C82D00038D0D /* GLPlayerInfoCell.swift */,
 				5E36D71F1EF3C95E00038D0D /* GLRoomInfoCell.swift */,
 				5E36D7191EF3C61F00038D0D /* GLRoomListViewController.swift */,
 				5E36D71B1EF3C76C00038D0D /* GLGameViewController.swift */,
 				5E36D7111EF3C2BE00038D0D /* GLBaseViewController.swift */,
 				5E36D7131EF3C3EF00038D0D /* Data Transport Layer */,
-				5E36D7141EF3C40A00038D0D /* Data Handler */,
-				5E47A51E1EF25D9500FC83C2 /* Player.swift */,
+				5E36D7141EF3C40A00038D0D /* Model */,
 				5EED44EA1EF12DB7006F7C2F /* Main.storyboard */,
 				5EED44ED1EF12DB7006F7C2F /* Assets.xcassets */,
 				5EED44EF1EF12DB7006F7C2F /* LaunchScreen.storyboard */,
@@ -321,6 +325,7 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Chameleon.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/HandyJSON.framework",
 			);
 			outputPaths = (
 			);
@@ -341,13 +346,13 @@
 				5ED867C11EF219C300F58AC1 /* GLPeripheralManager.swift in Sources */,
 				5E47A5211EF2756B00FC83C2 /* GLError.swift in Sources */,
 				5E36D7181EF3C56D00038D0D /* GLRoomCreaterViewController.swift in Sources */,
-				5E47A51F1EF25D9500FC83C2 /* Player.swift in Sources */,
+				5E7C5A691F04DFA9005050ED /* GLPlayer.swift in Sources */,
+				5E7C5A631F04D5A1005050ED /* GLNotification.swift in Sources */,
 				5E36D7161EF3C42F00038D0D /* GLHomePageViewController.swift in Sources */,
 				5E36D71E1EF3C82D00038D0D /* GLPlayerInfoCell.swift in Sources */,
 				5E36D71A1EF3C61F00038D0D /* GLRoomListViewController.swift in Sources */,
 				5E36D71C1EF3C76C00038D0D /* GLGameViewController.swift in Sources */,
 				5EAD63231EF13D4000EBF944 /* GLCentralManager.swift in Sources */,
-				5E47A5231EF2850300FC83C2 /* GLDataManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
