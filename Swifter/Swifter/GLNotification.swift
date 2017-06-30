@@ -13,8 +13,8 @@ let NotificationUpdatedSubscriberUUIDStringKey = "UpdatedSubscriberUUIDStringKey
 let NotificationPlayerDataUpdateKey = "PlayerDataUpdateKey"
 let NotificationCentralDidDiscoverPeripheralKey = "CentralDidDiscoverPeripheralKey"
 
-
-let NotificationCentralDeviceChangedToUnavailable = Notification.Name(rawValue: "CentralDeviceChangedToUnavailable")
+let NotificationCentralDidConnect = NSNotification.Name(rawValue: "CentralDidConnect")
+let NotificationCentralStateChangedToUnavailable = Notification.Name(rawValue: "CentralStateChangedToUnavailable")
 let NotificationCentralDidDiscoverPeripheral = Notification.Name(rawValue: "CentralDidDiscoverPeripheral")
 let NotificationPeripheralDeviceChangedToUnavailable = Notification.Name(rawValue: "PeripheralDeviceChangedToUnavailable")
 

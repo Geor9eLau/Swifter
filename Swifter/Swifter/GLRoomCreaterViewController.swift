@@ -9,31 +9,139 @@
 import Foundation
 import UIKit
 
-
 class GLRoomCreaterViewController: GLBaseViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var launchGameButton: UIButton!
-    
-    
-    var isRoomCreater: Bool = false
     fileprivate var centralManager: GLCentralManager?
     fileprivate var peripheralManager: GLPeripheralManager?
-    fileprivate var playerCount: Int = 1
-}
-
-
-// MARK: - Life Cycle
-extension GLRoomCreaterViewController {
-    override func viewDidLoad() {
+    var isRoomCreater: Bool = false
+    var isReadyToGo: Bool = false
+    fileprivate var playerData: [GLPlayer] = []
+    
+    @IBAction func playGame(_ sender: Any) {
         if isRoomCreater {
-            peripheralManager = GLPeripheralManager.default
-            peripheralManager?.startAdvertising()
+            peripheralManager?.startGame({[weak self] (isSucceed) in
+                let gameVC = GLGameViewController(nibName: "GLGameViewController", bundle: nil)
+                gameVC.isRoomCreater = true
+                self?.navigationController?.pushViewController(gameVC, animated: true)
+            })
         } else {
-            centralManager = GLCentralManager.default
-            
+            if isReadyToGo {
+                centralManager?.cancelReady()
+            } else {
+                centralManager?.getReady()
+            }
+            isReadyToGo = !isReadyToGo
+            updateLaunchBtn()
         }
     }
+    
+}
+
+// MARK: - Life cycle
+extension GLRoomCreaterViewController{
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        if isRoomCreater {
+            peripheralManager = GLPeripheralManager.default
+            peripheralManager!.startAdvertising()
+            playerData.append(peripheralManager!.peripheralPlayer)
+            collectionView.reloadData()
+        } else{
+            centralManager = GLCentralManager.default
+        }
+        
+        updateLaunchBtn()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(playerDataDidUpdate(_:)), name: NotificationPlayerDataUpdate, object: nil)
+        if isRoomCreater{
+            NotificationCenter.default.addObserver(self, selector: #selector(otherPlayerQuit(_:)), name: NotificationPeripheralUpdateSubscriber, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(quit(_:)), name: NotificationPeripheralDeviceChangedToUnavailable, object: nil)
+        } else{
+            NotificationCenter.default.addObserver(self, selector: #selector(quit(_:)), name: NotificationCentralStateChangedToUnavailable, object: nil)
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: NotificationPlayerDataUpdate, object: nil)
+        if isRoomCreater{
+            NotificationCenter.default.removeObserver(self, name: NotificationPeripheralUpdateSubscriber, object: nil)
+            NotificationCenter.default.removeObserver(self, name: NotificationPeripheralDeviceChangedToUnavailable, object: nil)
+        } else{
+            NotificationCenter.default.removeObserver(self, name: NotificationCentralStateChangedToUnavailable, object: nil)
+        }
+    }
+}
+
+// MARK: - Notification call-back method
+extension GLRoomCreaterViewController{
+    func playerDataDidUpdate(_ notification: Notification){
+        if let players = notification.userInfo?[NotificationPlayerDataUpdateKey] as? [GLPlayer] {
+            playerData = players
+            collectionView.reloadData()
+            if isRoomCreater {
+                guard playerData.filter({$0.isReady == false}).count == 1 else {
+                    print("Some player is not ready to go")
+                    isReadyToGo = false
+                    updateLaunchBtn()
+                    return
+                }
+                isReadyToGo = true
+                updateLaunchBtn()
+            } else {
+                if playerData.filter({$0.isReady == false}).count == 0 {
+                    let gameVC = GLGameViewController(nibName: "GLGameViewController", bundle: nil)
+                    gameVC.isRoomCreater = false
+                    navigationController?.pushViewController(gameVC, animated: true)
+                }
+            }
+        }
+    }
+    
+    func otherPlayerQuit(_ notification: Notification) {
+        
+    }
+    
+    func quit(_ notification: Notification) {
+        if isRoomCreater{
+            peripheralManager!.stopAdvertising()
+        }
+        navigationController?.popViewController(animated: true)
+    }
+}
+
+// MARK: - Private
+extension GLRoomCreaterViewController{
+    func updateLaunchBtn() {
+        if isRoomCreater {
+            if isReadyToGo{
+                launchGameButton.setTitle("Go", for: .normal)
+                launchGameButton.backgroundColor = UIColor.green
+                launchGameButton.isEnabled = true
+            } else {
+                launchGameButton.setTitle("Go", for: .normal)
+                launchGameButton.backgroundColor = UIColor.gray
+                launchGameButton.isEnabled = false
+            }
+        }
+        else {
+            if isReadyToGo{
+                launchGameButton.setTitle("Cancel", for: .normal)
+                launchGameButton.backgroundColor = UIColor.red
+            } else {
+                launchGameButton.setTitle("Ready", for: .normal)
+                launchGameButton.backgroundColor = UIColor.green
+            }
+        }
+    }
+}
+
+// MARK: - Event handler
+extension GLRoomCreaterViewController {
+    
 }
 
 
@@ -41,7 +149,7 @@ extension GLRoomCreaterViewController {
 // MARK: - UICollectionViewDataSource
 extension GLRoomCreaterViewController{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return playerCount
+        return playerData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

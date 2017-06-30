@@ -11,41 +11,40 @@ import UIKit
 import CoreBluetooth
 
 class GLRoomListViewController: GLBaseViewController, UITableViewDelegate, UITableViewDataSource {
-    
-    
+    let joinRoomSegueIdentifier = "JoinRoom"
+    fileprivate var centralManager: GLCentralManager?
+    fileprivate var isRoomCreater: Bool = false
     @IBOutlet weak var tableView: UITableView!
-    let centralManager = GLCentralManager.default
-    
     fileprivate var dataSource: [String] = []
-    fileprivate var isConnectedToRoomCreater: Bool = false
+}
+
+// MARK: - Life cycle
+extension GLRoomListViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        centralManager.startScan()
-        
-        NotificationCenter.default.addObserver(forName: NotificationCentralDidDiscoverPeripheral, object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            if let info = notification.userInfo,
-                let roomCreaterName = info[NotificationCentralDidDiscoverPeripheralKey] as? String{
-                self?.dataSource.append(roomCreaterName)
-                self?.tableView.reloadData()
-            }
-        }
-        
-        
-        
+        centralManager = GLCentralManager.default
+        centralManager?.startScan()
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self, name: NotificationCentralDidDiscoverPeripheral, object: nil)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(didDiscoverPeripheral(_:)), name: NotificationCentralDidDiscoverPeripheral, object: nil)
     }
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        return isConnectedToRoomCreater
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: NotificationCentralDidDiscoverPeripheral, object: nil)
     }
 }
 
-
-//MARK: - Life Cycle
-extension GLRoomCreaterViewController {
-    
+// MARK: - Notification call-back method
+extension GLRoomListViewController {
+    func didDiscoverPeripheral(_ notification: Notification) {
+        if let roomCreaterName = notification.userInfo?[NotificationCentralDidDiscoverPeripheralKey] as? String{
+            dataSource.append(roomCreaterName)
+            tableView.reloadData()
+        }
+    }
 }
 
 
@@ -68,9 +67,15 @@ extension GLRoomListViewController {
 extension GLRoomListViewController {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if isConnectedToRoomCreater == false {
-            centralManager.connect(with: dataSource[indexPath.row])
-        }
+            centralManager?.connect(with: dataSource[indexPath.row], {[weak self] (didConnect) in
+                if didConnect{
+                    let roomVC = GLRoomCreaterViewController(nibName: "GLRoomCreaterViewController", bundle: nil)
+                    roomVC.isRoomCreater = false
+                    self?.navigationController?.pushViewController(roomVC, animated: true)
+                }else{
+                    print("Connect failed!")
+                }
+            })
     }
 }
 

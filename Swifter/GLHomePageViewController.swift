@@ -9,10 +9,14 @@
 import Foundation
 import UIKit
 
-class GLHomePageViewController: GLBaseViewController {
+class GLHomePageViewController: UIViewController {
     let createRoomSegueIdentifier = "CreateRoom"
     let joinGameSegueIdentifier = "JoinGame"
     
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        return true
+    }
     
     override func performSegue(withIdentifier identifier: String, sender: Any?) {
         

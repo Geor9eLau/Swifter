@@ -14,7 +14,7 @@ struct GLPlayer: HandyJSON, Equatable {
     var name: String!
     var currentFinishRate: Float!
     var isRoomCreater: Bool!
-    var isReady: Bool!
+    var isReady: Bool = false
     
     public static func ==(lhs: GLPlayer, rhs: GLPlayer) -> Bool{
         return lhs.name == rhs.name

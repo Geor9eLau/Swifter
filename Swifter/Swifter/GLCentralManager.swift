@@ -27,6 +27,9 @@ class GLCentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
         return GLCentralManager()
     }()
     
+    typealias ConnectHandler = (Bool) -> ()
+    
+    fileprivate var connectHandler: ConnectHandler?
     fileprivate let queue = DispatchQueue(label: "CentralQueue")
     fileprivate var manager: CBCentralManager!
     fileprivate let playerDataUUID = UUID(uuidString: PlayerDataServiceUUIDString)
@@ -34,16 +37,16 @@ class GLCentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
     fileprivate var connectedPeripheral: CBPeripheral?
     fileprivate var gameSwitchCharacteristic: CBCharacteristic?
     fileprivate var playerDataCharacteristic: CBCharacteristic?
-    fileprivate var centralPlayer = GLPlayer(name: UIDevice.current.name, currentFinishRate: 0, isRoomCreater: false, isReady: false)
+    fileprivate var discoveredPeripheralNameInfo: [String] = []
     fileprivate var playerData: [GLPlayer] = []
     override init() {
         super.init()
         manager = CBCentralManager(delegate: self, queue: queue)
     }
     
-//    weak var delegate: GLCentralManagerDelegate?
     
-    var discoveredPeripheralNameInfo: [String] = []
+    var centralPlayer = GLPlayer(name: UIDevice.current.name, currentFinishRate: 0, isRoomCreater: false, isReady: false)
+    
     
     var discoveredPeripherals: [CBPeripheral] {
         if let validPlayerDataUUID = playerDataUUID,
@@ -75,7 +78,8 @@ extension GLCentralManager {
     }
     
     
-    func connect(with roomName: String) {
+    func connect(with roomName: String, _ handler: @escaping ConnectHandler) {
+        connectHandler = handler
         if let targetPeripheral = self.discoveredPeripherals.filter({$0.name == roomName}).first{
             manager.connect(targetPeripheral, options: [CBConnectPeripheralOptionNotifyOnConnectionKey: true, CBConnectPeripheralOptionNotifyOnDisconnectionKey: true])
         }
@@ -89,6 +93,11 @@ extension GLCentralManager {
     
     func updateFinishRate(_ rate: Float) {
         centralPlayer.currentFinishRate = rate
+        updateCentralPlayerData()
+    }
+    
+    func cancelReady(){
+        centralPlayer.isReady = false
         updateCentralPlayerData()
     }
     
@@ -138,15 +147,15 @@ extension GLCentralManager{
         
             switch central.state {
             case .poweredOff:
-                NotificationCenter.default.post(name: NotificationCentralDeviceChangedToUnavailable, object: nil, userInfo: ["reason": GLError.poweredOff])
+                NotificationCenter.default.post(name: NotificationCentralStateChangedToUnavailable, object: nil, userInfo: ["reason": GLError.poweredOff])
             case .unauthorized:
-                NotificationCenter.default.post(name: NotificationCentralDeviceChangedToUnavailable, object: nil, userInfo: ["reason": GLError.unauthorized])
+                NotificationCenter.default.post(name: NotificationCentralStateChangedToUnavailable, object: nil, userInfo: ["reason": GLError.unauthorized])
             case .unsupported:
-                NotificationCenter.default.post(name: NotificationCentralDeviceChangedToUnavailable, object: nil, userInfo: ["reason": GLError.unsupported])
+                NotificationCenter.default.post(name: NotificationCentralStateChangedToUnavailable, object: nil, userInfo: ["reason": GLError.unsupported])
             case .resetting:
-                NotificationCenter.default.post(name: NotificationCentralDeviceChangedToUnavailable, object: nil, userInfo: ["reason": GLError.resetting])
+                NotificationCenter.default.post(name: NotificationCentralStateChangedToUnavailable, object: nil, userInfo: ["reason": GLError.resetting])
             default:
-                NotificationCenter.default.post(name: NotificationCentralDeviceChangedToUnavailable, object: nil, userInfo: ["reason": GLError.unknown])
+                NotificationCenter.default.post(name: NotificationCentralStateChangedToUnavailable, object: nil, userInfo: ["reason": GLError.unknown])
             }
         }
         
@@ -169,11 +178,14 @@ extension GLCentralManager{
     }
     
     internal func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        NotificationCenter.default.post(name: NotificationCentralDeviceChangedToUnavailable, object: nil, userInfo: ["reason": GLError.disconnect])
+        NotificationCenter.default.post(name: NotificationCentralStateChangedToUnavailable, object: nil, userInfo: ["reason": GLError.disconnect])
     }
     
     internal func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
-        NotificationCenter.default.post(name: NotificationCentralDeviceChangedToUnavailable, object: nil, userInfo: ["reason": GLError.failToConnect])
+        NotificationCenter.default.post(name: NotificationCentralStateChangedToUnavailable, object: nil, userInfo: ["reason": GLError.failToConnect])
+        if let handler = connectHandler {
+            handler(false)
+        }
     }
 }
 
@@ -191,6 +203,13 @@ extension GLCentralManager {
         if error != nil {
             print(error!)
         }
+        
+        if characteristic.service.uuid.uuidString == PlayerDataServiceUUIDString {
+            if let data = characteristic.value{
+                playerData = data.transformDataToPlayerData()
+                NotificationCenter.default.post(name: NotificationPlayerDataUpdate, object: nil, userInfo: [NotificationPlayerDataUpdateKey: playerData])
+            }
+        }
     }
     
     internal func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
@@ -203,6 +222,10 @@ extension GLCentralManager {
                     peripheral.writeValue(data, for: characteritic, type: .withoutResponse)
                 }
                 peripheral.setNotifyValue(true, for: characteritic)
+                
+                if let handler = connectHandler {
+                    handler(true)
+                }
             }
         }
     }
@@ -212,13 +235,12 @@ extension GLCentralManager {
             print(error!)
             return
         }
-        
         if characteristic.service.uuid.uuidString == PlayerDataServiceUUIDString {
             if let data = characteristic.value{
-                NotificationCenter.default.post(name: NotificationPlayerDataUpdate, object: nil, userInfo: [NotificationPlayerDataUpdateKey: data.transformDataToPlayerData()])
+                playerData = data.transformDataToPlayerData()
+                NotificationCenter.default.post(name: NotificationPlayerDataUpdate, object: nil, userInfo: [NotificationPlayerDataUpdateKey: playerData])
             }
         }
-        
     }
 }
 
@@ -240,7 +262,6 @@ extension Array where Element == GLPlayer {
         }catch(let error){
             print(error)
         }
-    
         return nil
     }
 }
@@ -256,7 +277,6 @@ extension Data {
                     tmpPlayers.append(player)
                 }
             }
-            
         } catch(let error){
             print(error)
         }

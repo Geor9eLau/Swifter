@@ -21,12 +21,14 @@ class GLPeripheralManager: NSObject, CBPeripheralManagerDelegate {
        return GLPeripheralManager()
     }()
     
+    typealias StartGameHandler = (_ isSucceed: Bool) -> ()
+    fileprivate var startHandler: StartGameHandler?
     fileprivate let queue = DispatchQueue(label: "PeripheralQueue")
     fileprivate var manager: CBPeripheralManager!
     fileprivate var subscribedCenteral: [CBCentral] = []
 //    fileprivate var gameSwitchCharacteristic: CBMutableCharacteristic?
     fileprivate var playerDataCharacteristic: CBMutableCharacteristic?
-    fileprivate var peripheralPlayer = GLPlayer(name: UIDevice.current.name, currentFinishRate: 0, isRoomCreater: true, isReady: false)
+    var peripheralPlayer = GLPlayer(name: UIDevice.current.name, currentFinishRate: 0, isRoomCreater: true, isReady: false)
     fileprivate var playerData: [GLPlayer] = []
     private override init() {
         super.init()
@@ -70,9 +72,11 @@ extension GLPeripheralManager {
     func updateFinishRate(_ rate: Float) {
         peripheralPlayer.currentFinishRate = rate
         updatePeripheralPlayerData()
+        
     }
     
-    func startGame() {
+    func startGame(_ handler: @escaping StartGameHandler) {
+        startHandler = handler
         guard playerData.filter({$0.isReady == false}).count == 1 else {
             print("Some player is not ready to go")
             return
@@ -87,10 +91,19 @@ extension GLPeripheralManager {
 // MARK: - Private
 extension GLPeripheralManager {
     fileprivate func updatePeripheralPlayerData() {
-        if let characteristic = playerDataCharacteristic,
-            let data = playerData.transformPlayerDataToData(){
-            manager.updateValue(data, for: characteristic, onSubscribedCentrals: subscribedCenteral)
+        if let characteristic = playerDataCharacteristic {
+            playerData = playerData.flatMap({ (player) -> GLPlayer in
+                if player == peripheralPlayer{
+                    return peripheralPlayer
+                }else{
+                    return player
+                }
+            })
+            if let data = playerData.transformPlayerDataToData(){
+                manager.updateValue(data, for: characteristic, onSubscribedCentrals: subscribedCenteral)
+            }
         }
+        
     }
 }
 
@@ -99,7 +112,6 @@ extension GLPeripheralManager {
 extension GLPeripheralManager {
     internal func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
         if peripheral.state == .poweredOn{
-
             print("Peripheral is powered on!")
         }else{
             switch peripheral.state {
@@ -116,53 +128,27 @@ extension GLPeripheralManager {
             }
 
         }
-        
-//        if let validDelegate = delegate {
-//            switch peripheral.state {
-//            case .poweredOff:
-//                validDelegate.peripheralManager(self, didFail: .poweredOff)
-//            case .unauthorized:
-//                validDelegate.peripheralManager(self, didFail: .unauthorized)
-//            case .unsupported:
-//                validDelegate.peripheralManager(self, didFail: .unsupported)
-//            case .resetting:
-//                validDelegate.peripheralManager(self, didFail: .resetting)
-//            default:
-//                validDelegate.peripheralManager(self, didFail: .unknown)
-//            }
-//        }
     }
     
     
     internal func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didSubscribeTo characteristic: CBCharacteristic) {
-//        if subscribedCenteral.contains(central) == false,
-//            let validDelegate = delegate
-//           {
-//            subscribedCenteral.append(central)
-//            
-//            
-//            NotificationCenter.default.post(name: NotificationPeripheralUpdateSubscriber, object: nil, userInfo: [NotificationUpdatedSubscriberUUIDStringKey: central.identifier.uuidString])
-//            validDelegate.peripheralManager(self, didGetNewSubscriber: subscribedCenteral.count)
-//        }
+
     }
     
     internal func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didUnsubscribeFrom characteristic: CBCharacteristic) {
-        
-//        if subscribedCenteral.contains(central) {
-//            subscribedCenteral.remove(at: subscribedCenteral.index(of: central)!)
-//            NotificationCenter.default.post(name: NotificationPeripheralUpdateSubscriber, object: nil, userInfo: [NotificationUpdatedSubscriberUUIDStringKey: central.identifier.uuidString])
-//        }
+        if subscribedCenteral.contains(central) {
+            subscribedCenteral.remove(at: subscribedCenteral.index(of: central)!)
+            NotificationCenter.default.post(name: NotificationPeripheralUpdateSubscriber, object: nil, userInfo: [NotificationUpdatedSubscriberUUIDStringKey: central.identifier.uuidString])
+        }
     }
     
-    
-    internal func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveRead request: CBATTRequest) {
-        
-    }
     
     internal func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveWrite requests: [CBATTRequest]) {
         if let characteristic = requests.first,
             let data = characteristic.value{
-            NotificationCenter.default.post(name: NotificationPlayerDataUpdate, object: nil, userInfo: [NotificationPlayerDataUpdateKey: data.transformDataToPlayerData()])
+            playerData = data.transformDataToPlayerData()
+            NotificationCenter.default.post(name: NotificationPlayerDataUpdate, object: nil, userInfo: [NotificationPlayerDataUpdateKey: playerData])
+            
         }
     }
     
