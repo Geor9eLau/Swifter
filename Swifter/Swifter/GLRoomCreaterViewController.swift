@@ -45,11 +45,13 @@ extension GLRoomCreaterViewController{
         super.viewDidLoad()
         if isRoomCreater {
             peripheralManager = GLPeripheralManager.default
-            peripheralManager!.startAdvertising()
+//            peripheralManager!.startAdvertising()
             playerData.append(peripheralManager!.peripheralPlayer)
             collectionView.reloadData()
         } else{
             centralManager = GLCentralManager.default
+            playerData = (centralManager?.playerData)!
+            collectionView.reloadData()
         }
         
         updateLaunchBtn()
@@ -80,36 +82,45 @@ extension GLRoomCreaterViewController{
 extension GLRoomCreaterViewController{
     func playerDataDidUpdate(_ notification: Notification){
         if let players = notification.userInfo?[NotificationPlayerDataUpdateKey] as? [GLPlayer] {
-            playerData = players
-            collectionView.reloadData()
-            if isRoomCreater {
-                guard playerData.filter({$0.isReady == false}).count == 1 else {
-                    print("Some player is not ready to go")
-                    isReadyToGo = false
-                    updateLaunchBtn()
-                    return
-                }
-                isReadyToGo = true
-                updateLaunchBtn()
-            } else {
-                if playerData.filter({$0.isReady == false}).count == 0 {
-                    let gameVC = GLGameViewController(nibName: "GLGameViewController", bundle: nil)
-                    gameVC.isRoomCreater = false
-                    navigationController?.pushViewController(gameVC, animated: true)
+            DispatchQueue.main.async {[weak self] in
+                self?.playerData = players
+                self?.collectionView.reloadData()
+                if (self?.isRoomCreater)! {
+                    guard self?.playerData.filter({$0.isReady == false}).count == 1 else {
+                        print("Some player is not ready to go")
+                        self?.isReadyToGo = false
+                        self?.updateLaunchBtn()
+                        return
+                    }
+                    self?.isReadyToGo = true
+                    self?.updateLaunchBtn()
+                } else {
+                    if self?.playerData.filter({$0.isReady == false}).count == 0 {
+                        let gameVC = GLGameViewController(nibName: "GLGameViewController", bundle: nil)
+                        gameVC.isRoomCreater = false
+                        self?.navigationController?.pushViewController(gameVC, animated: true)
+                    }
                 }
             }
+            
         }
     }
     
     func otherPlayerQuit(_ notification: Notification) {
-        
+        DispatchQueue.main.async {[weak self] in
+            self?.playerData.append((self?.peripheralManager!.peripheralPlayer)!)
+            self?.collectionView.reloadData()
+        }
     }
     
     func quit(_ notification: Notification) {
         if isRoomCreater{
             peripheralManager!.stopAdvertising()
         }
-        navigationController?.popViewController(animated: true)
+        DispatchQueue.main.async {[weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }
+        
     }
 }
 

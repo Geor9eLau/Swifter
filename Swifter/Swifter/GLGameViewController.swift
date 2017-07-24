@@ -18,14 +18,18 @@ class GLGameViewController: GLBaseViewController {
     var isRoomCreater: Bool = false
     
     
+    @IBOutlet weak var currentPostionLbl: UILabel!
+    @IBOutlet weak var otherPlayerView: UIImageView!
     
     
     @IBAction func leftBtnDidTapped(_ sender: UIButton) {
         myPlayer!.currentFinishRate += 1
+        currentPostionLbl.text = "\(myPlayer!.currentFinishRate)"
     }
     
     @IBAction func rightBtnDidTapped(_ sender: UIButton) {
         myPlayer!.currentFinishRate += 1
+        currentPostionLbl.text = "\(myPlayer!.currentFinishRate)"
     }
     
 }
@@ -36,9 +40,9 @@ extension GLGameViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if isRoomCreater {
-            centralManager = GLCentralManager.default
-        } else {
             peripheralManager = GLPeripheralManager.default
+        } else {
+            centralManager = GLCentralManager.default
         }
         timer = Timer(timeInterval: 0.1, target: self, selector: #selector(sendMyPlayerData), userInfo: nil, repeats: true)
         
@@ -70,12 +74,21 @@ extension GLGameViewController{
     func playerDataDidUpdate(_ notification: Notification){
         if let players = notification.userInfo?[NotificationPlayerDataUpdateKey] as? [GLPlayer] {
             playerData = players
-            
+            if let otherPlayer = players.filter({$0.name != myPlayer?.name}).first,
+                otherPlayer.currentFinishRate == 100 {
+                let finishView = UIView(frame: UIScreen.main.bounds)
+                finishView.backgroundColor = UIColor.red
+                finishView.alpha = 0.5
+                UIApplication.shared.keyWindow?.addSubview(finishView)
+            }
         }
     }
     
     func otherPlayerQuit(_ notification: Notification) {
-        
+        let finishView = UIView(frame: UIScreen.main.bounds)
+        finishView.backgroundColor = UIColor.red
+        finishView.alpha = 0.5
+        UIApplication.shared.keyWindow?.addSubview(finishView)
     }
     
     func quit(_ notification: Notification) {
@@ -90,9 +103,18 @@ extension GLGameViewController{
 extension GLGameViewController {
     @objc fileprivate func sendMyPlayerData() {
         if isRoomCreater {
-            centralManager?.updateFinishRate((myPlayer?.currentFinishRate)!)
-        } else {
             peripheralManager?.updateFinishRate((myPlayer?.currentFinishRate)!)
+        } else {
+            centralManager?.updateFinishRate((myPlayer?.currentFinishRate)!)
+        }
+    }
+    
+    fileprivate func checkIfFinish() {
+        if myPlayer?.currentFinishRate == 100 {
+            let finishView = UIView(frame: UIScreen.main.bounds)
+            finishView.backgroundColor = UIColor.green
+            finishView.alpha = 0.5
+            UIApplication.shared.keyWindow?.addSubview(finishView)
         }
     }
     

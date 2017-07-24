@@ -10,10 +10,11 @@ import Foundation
 import CoreBluetooth
 import UIKit
 
-let GameSwitchServiceUUIDString = "8D50AD4E-E058-404C-8DD6-E116C8376D43"
+let GameConnectUUIDString = "8D50AD4E-E058-404C-8DD6-E116C8376D43"
+
 let PlayerDataServiceUUIDString = "69C88932-A2FD-4FB0-B74E-917ADEFFAF04"
 let PlayerDataCharacteristicUUIDString = "2B9437B4-D3DA-4ED2-9CD1-59AFD2BB593F"
-let GameSwitchCharacteristicUUIDString = "A853EEBC-481C-43AA-8589-515B196E7EB6"
+let GameCreaterCharacteristicUUIDString = "A853EEBC-481C-43AA-8589-515B196E7EB6"
 
 //protocol GLCentralManagerDelegate: class {
 //    func centralManager(_ manager: GLCentralManager, update playerData: Data)
@@ -32,34 +33,26 @@ class GLCentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
     fileprivate var connectHandler: ConnectHandler?
     fileprivate let queue = DispatchQueue(label: "CentralQueue")
     fileprivate var manager: CBCentralManager!
-    fileprivate let playerDataUUID = UUID(uuidString: PlayerDataServiceUUIDString)
-    fileprivate let gameSwitchUUID = UUID(uuidString: GameSwitchCharacteristicUUIDString)
+    fileprivate let playerDataServiceUUID = UUID(uuidString: PlayerDataServiceUUIDString)
     fileprivate var connectedPeripheral: CBPeripheral?
-    fileprivate var gameSwitchCharacteristic: CBCharacteristic?
     fileprivate var playerDataCharacteristic: CBCharacteristic?
     fileprivate var discoveredPeripheralNameInfo: [String] = []
-    fileprivate var playerData: [GLPlayer] = []
+    var playerData: [GLPlayer] = []
     override init() {
         super.init()
         manager = CBCentralManager(delegate: self, queue: queue)
+        playerData = [centralPlayer]
     }
     
     
     var centralPlayer = GLPlayer(name: UIDevice.current.name, currentFinishRate: 0, isRoomCreater: false, isReady: false)
     
     
-    var discoveredPeripherals: [CBPeripheral] {
-        if let validPlayerDataUUID = playerDataUUID,
-            let vaildGameSwitchUUID = gameSwitchUUID{
-            return manager.retrievePeripherals(withIdentifiers: [validPlayerDataUUID, vaildGameSwitchUUID])
-        }
-        return []
-    }
+    var discoveredPeripherals: [CBPeripheral]  = []
     
     var connectedPeripherals: [CBPeripheral] {
-        if let validPlayerDataUUID = playerDataUUID,
-            let vaildGameSwitchUUID = gameSwitchUUID{
-            return manager.retrieveConnectedPeripherals(withServices: [CBUUID(nsuuid: validPlayerDataUUID), CBUUID(nsuuid: vaildGameSwitchUUID)])
+        if let validUUID = playerDataServiceUUID{
+            return manager.retrieveConnectedPeripherals(withServices: [CBUUID(nsuuid: validUUID)])
         }
         return []
     }
@@ -80,9 +73,11 @@ extension GLCentralManager {
     
     func connect(with roomName: String, _ handler: @escaping ConnectHandler) {
         connectHandler = handler
-        if let targetPeripheral = self.discoveredPeripherals.filter({$0.name == roomName}).first{
-            manager.connect(targetPeripheral, options: [CBConnectPeripheralOptionNotifyOnConnectionKey: true, CBConnectPeripheralOptionNotifyOnDisconnectionKey: true])
-        }
+        manager.connect(discoveredPeripherals.first!, options: [CBConnectPeripheralOptionNotifyOnConnectionKey: true, CBConnectPeripheralOptionNotifyOnDisconnectionKey: true])
+        
+//        if let targetPeripheral = self.discoveredPeripherals.filter({$0.name == roomName}).first{
+//            manager.connect(targetPeripheral, options: [CBConnectPeripheralOptionNotifyOnConnectionKey: true, CBConnectPeripheralOptionNotifyOnDisconnectionKey: true])
+//        }
     }
     
     func disconnect() {
@@ -111,10 +106,8 @@ extension GLCentralManager {
 // MARK: - Private
 extension GLCentralManager {
     fileprivate func scan() {
-        if let validPlayerDataUUID = playerDataUUID,
-            let vaildGameSwitchUUID = gameSwitchUUID,
-                manager.state == .poweredOn{
-            manager.scanForPeripherals(withServices: [CBUUID(nsuuid: validPlayerDataUUID), CBUUID(nsuuid: vaildGameSwitchUUID)], options: nil)
+        if manager.state == .poweredOn{
+            manager.scanForPeripherals(withServices: [CBUUID(string: PlayerDataServiceUUIDString)], options: nil)
         }
     }
     
@@ -129,7 +122,7 @@ extension GLCentralManager {
                 }
             })
             if let data = playerData.transformPlayerDataToData(){
-                peripheral.writeValue(data, for: characteristic, type: .withoutResponse)
+                peripheral.writeValue(data, for: characteristic, type: .withResponse)
             }
         }
     }
@@ -143,6 +136,7 @@ extension GLCentralManager{
     internal func centralManagerDidUpdateState(_ central: CBCentralManager) {
         if central.state == .poweredOn{
             print("Manager is ready to scan!")
+            scan()
         }else{
         
             switch central.state {
@@ -165,6 +159,7 @@ extension GLCentralManager{
         if let name = advertisementData[CBAdvertisementDataLocalNameKey] as? String{
             if discoveredPeripheralNameInfo.contains(name) == false {
                 discoveredPeripheralNameInfo.append(name)
+                discoveredPeripherals.append(peripheral)
                 NotificationCenter.default.post(name: NotificationCentralDidDiscoverPeripheral, object: nil, userInfo: [NotificationCentralDidDiscoverPeripheralKey: name])
             }
         }
@@ -173,8 +168,11 @@ extension GLCentralManager{
     internal func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         connectedPeripheral = peripheral
         peripheral.delegate = self
-        peripheral.discoverServices([CBUUID(string: PlayerDataServiceUUIDString), CBUUID(string: GameSwitchCharacteristicUUIDString)])
         
+        if peripheral.services == nil {
+//            peripheral.discoverServices(nil)
+            peripheral.discoverServices([CBUUID(string: PlayerDataServiceUUIDString)])
+        }
     }
     
     internal func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
@@ -197,6 +195,18 @@ extension GLCentralManager {
         if error != nil {
             print(error!)
         }
+        if characteristic.service.uuid.uuidString == PlayerDataServiceUUIDString {
+            if let data = characteristic.value{
+                playerData = data.transformDataToPlayerData()
+                NotificationCenter.default.post(name: NotificationPlayerDataUpdate, object: nil, userInfo: [NotificationPlayerDataUpdateKey: playerData])
+                if playerData.count == 2 {
+                    if connectHandler != nil {
+                        connectHandler!(true)
+                    }
+                }
+                
+            }
+        }
     }
     
     internal func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
@@ -204,27 +214,20 @@ extension GLCentralManager {
             print(error!)
         }
         
-        if characteristic.service.uuid.uuidString == PlayerDataServiceUUIDString {
-            if let data = characteristic.value{
-                playerData = data.transformDataToPlayerData()
-                NotificationCenter.default.post(name: NotificationPlayerDataUpdate, object: nil, userInfo: [NotificationPlayerDataUpdateKey: playerData])
-            }
-        }
+
     }
     
     internal func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         if service.uuid.uuidString == PlayerDataServiceUUIDString {
-            if let characteritic = service.characteristics?.first {
-                playerDataCharacteristic = characteritic as? CBMutableCharacteristic
-                playerData = characteritic.value!.transformDataToPlayerData()
-                playerData.append(centralPlayer)
-                if let data = playerData.transformPlayerDataToData(){
-                    peripheral.writeValue(data, for: characteritic, type: .withoutResponse)
-                }
-                peripheral.setNotifyValue(true, for: characteritic)
-                
-                if let handler = connectHandler {
-                    handler(true)
+            for characteristic in service.characteristics! {
+                if characteristic.uuid.uuidString == GameCreaterCharacteristicUUIDString {
+                    playerData.append((characteristic.value?.transformDataToPlayerData().first)!)
+                } else {
+                    playerDataCharacteristic = characteristic
+                    if let data = playerData.transformPlayerDataToData(){
+                        peripheral.setNotifyValue(true, for: playerDataCharacteristic!)
+                        peripheral.writeValue(data, for: playerDataCharacteristic!, type: .withResponse)
+                    }
                 }
             }
         }
@@ -235,20 +238,35 @@ extension GLCentralManager {
             print(error!)
             return
         }
-        if characteristic.service.uuid.uuidString == PlayerDataServiceUUIDString {
-            if let data = characteristic.value{
-                playerData = data.transformDataToPlayerData()
-                NotificationCenter.default.post(name: NotificationPlayerDataUpdate, object: nil, userInfo: [NotificationPlayerDataUpdateKey: playerData])
-            }
+    }
+    
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
+        if error != nil {
+            print(error!)
+            return
         }
+        connectedPeripheral = peripheral
+        if let service = peripheral.services?.first {
+            peripheral.discoverCharacteristics(nil, for: service)
+//            peripheral.discoverCharacteristics([CBUUID(string: PlayerDataCharacteristicUUIDString)], for:service)
+        }
+        
     }
 }
+
+
 
 
 
 extension Array where Element == GLPlayer {
 
     func transformPlayerDataToData() -> Data? {
+        
+        if let jsonStr = [GLPlayer].toJSONString(self)(prettyPrint: true){
+            return jsonStr.data(using: .utf8)
+        }
+        return nil
+        
         
         var tmpJson:[[String: Any]] = []
         for player in self{
@@ -269,10 +287,21 @@ extension Array where Element == GLPlayer {
 
 extension Data {
     func transformDataToPlayerData() -> [GLPlayer] {
+        
+        if let jsonStr = String(data: self, encoding: .utf8),
+          let result = [GLPlayer].deserialize(from: jsonStr) as? [GLPlayer]{
+            return result
+        }
+        return []
+
+        
         var tmpPlayers:[GLPlayer] = []
         do {
-            let playerDataArray = try JSONSerialization.jsonObject(with: self, options: .mutableContainers) as! [[String: Any]]
-            for playerData in playerDataArray {
+            let playerDataArray = try JSONSerialization.jsonObject(with: self, options: .mutableContainers)
+            
+            
+
+            for playerData in playerDataArray as! [[String: Any]]{
                 if let player = GLPlayer.deserialize(from: playerData as NSDictionary){
                     tmpPlayers.append(player)
                 }

@@ -163,7 +163,7 @@
         <!--My Room-->
         <scene sceneID="vfQ-XG-cPl">
             <objects>
-                <viewController id="rSv-xz-Z22" customClass="GLRoomCreaterViewController" customModule="Swifter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GLRoomCreaterViewController" id="rSv-xz-Z22" customClass="GLRoomCreaterViewController" customModule="Swifter" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Kbv-9O-Xjj"/>
                         <viewControllerLayoutGuide type="bottom" id="XkM-1V-EPF"/>
@@ -338,6 +338,10 @@
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="currentPostionLbl" destination="bd0-UD-gid" id="egd-FI-OTN"/>
+                        <outlet property="otherPlayerView" destination="oZv-pK-zPJ" id="KoC-i9-VfL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TdI-tA-qoe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

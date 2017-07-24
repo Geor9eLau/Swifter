@@ -23,7 +23,7 @@ extension GLRoomListViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         centralManager = GLCentralManager.default
-        centralManager?.startScan()
+//        centralManager?.startScan()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,7 +42,9 @@ extension GLRoomListViewController {
     func didDiscoverPeripheral(_ notification: Notification) {
         if let roomCreaterName = notification.userInfo?[NotificationCentralDidDiscoverPeripheralKey] as? String{
             dataSource.append(roomCreaterName)
-            tableView.reloadData()
+            DispatchQueue.main.async {[weak self] in
+                self?.tableView.reloadData()
+            }
         }
     }
 }
@@ -69,9 +71,12 @@ extension GLRoomListViewController {
         tableView.deselectRow(at: indexPath, animated: true)
             centralManager?.connect(with: dataSource[indexPath.row], {[weak self] (didConnect) in
                 if didConnect{
-                    let roomVC = GLRoomCreaterViewController(nibName: "GLRoomCreaterViewController", bundle: nil)
-                    roomVC.isRoomCreater = false
-                    self?.navigationController?.pushViewController(roomVC, animated: true)
+                    DispatchQueue.main.async {[weak self] in
+                        let roomVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GLRoomCreaterViewController") as! GLRoomCreaterViewController
+                        roomVC.isRoomCreater = false
+                        self?.navigationController?.pushViewController(roomVC, animated: true)
+                    }
+                    
                 }else{
                     print("Connect failed!")
                 }
