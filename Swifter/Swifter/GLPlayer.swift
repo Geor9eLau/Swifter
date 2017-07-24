@@ -11,9 +11,9 @@ import HandyJSON
 
 struct GLPlayer: HandyJSON, Equatable {
 //    var uuid: String!
-    var name: String!
-    var currentFinishRate: Float!
-    var isRoomCreater: Bool!
+    var name: String = ""
+    var currentFinishRate: Float = 0
+    var isRoomCreater: Bool = false
     var isReady: Bool = false
     
     public static func ==(lhs: GLPlayer, rhs: GLPlayer) -> Bool{

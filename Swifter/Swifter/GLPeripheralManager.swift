@@ -42,7 +42,7 @@ class GLPeripheralManager: NSObject, CBPeripheralManagerDelegate {
 // MARK: - Private
 extension GLPeripheralManager {
     fileprivate func setupService(){
-        playerDataCharacteristic = CBMutableCharacteristic(type: CBUUID(string: PlayerDataCharacteristicUUIDString), properties: [.notify , .read] , value: playerData.transformPlayerDataToData(), permissions: [.writeable, .readable])
+        playerDataCharacteristic = CBMutableCharacteristic(type: CBUUID(string: PlayerDataCharacteristicUUIDString), properties: [.notify , .read] , value: nil, permissions: [.writeable, .readable])
 //        gameSwitchCharacteristic = CBMutableCharacteristic(type: CBUUID(string: GameSwitchCharacteristicUUIDString), properties: [.notify , .read] , value: nil, permissions: [.writeable, .readable])
         let playerDataService = CBMutableService(type: CBUUID(string: PlayerDataCharacteristicUUIDString), primary: true)
         playerDataService.characteristics = [playerDataCharacteristic!]
