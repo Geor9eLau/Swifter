@@ -223,10 +223,12 @@ extension GLCentralManager {
                 if characteristic.uuid.uuidString == GameCreaterCharacteristicUUIDString {
                     playerData.append((characteristic.value?.transformDataToPlayerData().first)!)
                 } else {
+                    peripheral.setNotifyValue(true, for: characteristic)
                     playerDataCharacteristic = characteristic
                     if let data = playerData.transformPlayerDataToData(){
-                        peripheral.setNotifyValue(true, for: playerDataCharacteristic!)
-                        peripheral.writeValue(data, for: playerDataCharacteristic!, type: .withResponse)
+//                        peripheral.readValue(for: characteristic)
+                         peripheral.writeValue(data, for: playerDataCharacteristic!, type: .withResponse)
+                        
                     }
                 }
             }
@@ -262,8 +264,9 @@ extension Array where Element == GLPlayer {
 
     func transformPlayerDataToData() -> Data? {
         
-        if let jsonStr = [GLPlayer].toJSONString(self)(prettyPrint: true){
-            return jsonStr.data(using: .utf8)
+        if let jsonStr = [GLPlayer].toJSONString(self)(prettyPrint: false){
+            let resultStr = "\(jsonStr)Swifter!!!!!!!!!!!!!"
+            return resultStr.data(using: .utf8)
         }
         return nil
         
@@ -288,9 +291,11 @@ extension Array where Element == GLPlayer {
 extension Data {
     func transformDataToPlayerData() -> [GLPlayer] {
         
-        if let jsonStr = String(data: self, encoding: .utf8),
-          let result = [GLPlayer].deserialize(from: jsonStr) as? [GLPlayer]{
-            return result
+        if let resultStr = String(data: self, encoding: .utf8),
+            let jsonStr = resultStr.components(separatedBy: "Swifter").first{
+            if let result = [GLPlayer].deserialize(from: jsonStr) as? [GLPlayer]{
+                return result
+            }
         }
         return []
 

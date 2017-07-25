@@ -144,15 +144,19 @@ extension GLPeripheralManager {
     
     
     internal func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveWrite requests: [CBATTRequest]) {
-        if let characteristic = requests.first,
-            let data = characteristic.value{
+        
+       
+        if let request = requests.first,
+            let data = request.value{
+             peripheral.respond(to: request, withResult: .success)
             playerData = data.transformDataToPlayerData()
             if playerData.count == 1 {
                 playerData.append(peripheralPlayer)
-                manager.updateValue(playerData.transformPlayerDataToData()!, for: playerDataCharacteristic!, onSubscribedCentrals: subscribedCenteral)
+            self.manager.updateValue(self.playerData.transformPlayerDataToData()!, for: self.playerDataCharacteristic!, onSubscribedCentrals: self.subscribedCenteral)
             }
             NotificationCenter.default.post(name: NotificationPlayerDataUpdate, object: nil, userInfo: [NotificationPlayerDataUpdateKey: playerData])
         }
+        
     }
     
     internal func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?) {
