@@ -20,6 +20,8 @@ let NotificationPeripheralDeviceChangedToUnavailable = Notification.Name(rawValu
 let NotificationPeripheralUpdateSubscriber = Notification.Name(rawValue: "PeripheralUpdateSubscriber")
 
 
+let NotificationErrorDidOccur = Notification.Name(rawValue: "ErrorDidOccur")
+
 let NotificationDidReceiveOtherPlayerName = Notification.Name(rawValue: "ReceivePlayerName")
 let NotificationOtherPlayerReadyStateDidChange = Notification.Name(rawValue: "PlayerReadyStateDidChange")
 let NotificationOtherPlayerFinishRateDidChange = Notification.Name(rawValue: "PlayerFinishRateDidChange")

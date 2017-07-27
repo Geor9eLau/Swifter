@@ -95,6 +95,7 @@ extension GLCentralManager {
     
     func getReady() {
         centralPlayer.isReady = true
+        centralPlayer.currentFinishRate = 0
         if let data = "1".data(using: .utf8),
             let peripheral = connectedPeripheral,
             let characteristic = playerReadyStateCharacteristic{
@@ -126,15 +127,15 @@ extension GLCentralManager{
         
             switch central.state {
             case .poweredOff:
-                NotificationCenter.default.post(name: NotificationCentralStateChangedToUnavailable, object: nil, userInfo: ["reason": GLError.poweredOff])
+                NotificationCenter.default.post(name: NotificationErrorDidOccur, object: nil, userInfo: [NotificationErrorKey : GLError.poweredOff])
             case .unauthorized:
-                NotificationCenter.default.post(name: NotificationCentralStateChangedToUnavailable, object: nil, userInfo: ["reason": GLError.unauthorized])
+                NotificationCenter.default.post(name: NotificationErrorDidOccur, object: nil, userInfo: [NotificationErrorKey: GLError.unauthorized])
             case .unsupported:
-                NotificationCenter.default.post(name: NotificationCentralStateChangedToUnavailable, object: nil, userInfo: ["reason": GLError.unsupported])
+                NotificationCenter.default.post(name: NotificationErrorDidOccur, object: nil, userInfo: [NotificationErrorKey: GLError.unsupported])
             case .resetting:
-                NotificationCenter.default.post(name: NotificationCentralStateChangedToUnavailable, object: nil, userInfo: ["reason": GLError.resetting])
+                NotificationCenter.default.post(name: NotificationErrorDidOccur, object: nil, userInfo: [NotificationErrorKey: GLError.resetting])
             default:
-                NotificationCenter.default.post(name: NotificationCentralStateChangedToUnavailable, object: nil, userInfo: ["reason": GLError.unknown])
+                NotificationCenter.default.post(name: NotificationErrorDidOccur, object: nil, userInfo: [NotificationErrorKey: GLError.unknown])
             }
         }
         
@@ -155,17 +156,16 @@ extension GLCentralManager{
         peripheral.delegate = self
         
         if peripheral.services == nil {
-//            peripheral.discoverServices(nil)
             peripheral.discoverServices([CBUUID(string: PlayerDataServiceUUIDString)])
         }
     }
     
     internal func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        NotificationCenter.default.post(name: NotificationCentralStateChangedToUnavailable, object: nil, userInfo: ["reason": GLError.disconnect])
+        NotificationCenter.default.post(name: NotificationErrorDidOccur, object: nil, userInfo: [NotificationErrorKey: GLError.disconnect])
     }
     
     internal func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
-        NotificationCenter.default.post(name: NotificationCentralStateChangedToUnavailable, object: nil, userInfo: ["reason": GLError.failToConnect])
+        NotificationCenter.default.post(name: NotificationErrorDidOccur, object: nil, userInfo: [NotificationErrorKey: GLError.failToConnect])
     }
 }
 

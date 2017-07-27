@@ -10,11 +10,6 @@ import Foundation
 import CoreBluetooth
 import UIKit
 
-//protocol GLPeripheralManagerDelegate: class {
-//    func peripheralManager(_ manager: GLPeripheralManager, update playerData: Data)
-//    func peripheralManager(_ manager: GLPeripheralManager, didFail error: GLError)
-//    func peripheralManager(_ manager: GLPeripheralManager, didGetNewSubscriber subscriberCount: Int)
-//}
 
 class GLPeripheralManager: NSObject, CBPeripheralManagerDelegate {
     static let `default`: GLPeripheralManager = {
@@ -77,8 +72,16 @@ extension GLPeripheralManager {
     
     func startGame() {
         peripheralPlayer.isReady = true
-        
+        peripheralPlayer.currentFinishRate = 0
         if let data = "1".data(using: .utf8){
+            manager.updateValue(data, for: playerReadyStateCharacteristic, onSubscribedCentrals: nil)
+        }
+    }
+    
+    func resetGame() {
+        peripheralPlayer.isReady = false
+        
+        if let data = "0".data(using: .utf8){
             manager.updateValue(data, for: playerReadyStateCharacteristic, onSubscribedCentrals: nil)
         }
     }
@@ -105,17 +108,16 @@ extension GLPeripheralManager {
         }else{
             switch peripheral.state {
             case .poweredOff:
-                NotificationCenter.default.post(name: NotificationPeripheralDeviceChangedToUnavailable, object: nil, userInfo: ["reason": GLError.poweredOff])
+                NotificationCenter.default.post(name: NotificationErrorDidOccur, object: nil, userInfo: [NotificationErrorKey: GLError.poweredOff])
             case .unauthorized:
-                NotificationCenter.default.post(name: NotificationPeripheralDeviceChangedToUnavailable, object: nil, userInfo: ["reason": GLError.unauthorized])
+                NotificationCenter.default.post(name: NotificationErrorDidOccur, object: nil, userInfo: [NotificationErrorKey: GLError.unauthorized])
             case .unsupported:
-                NotificationCenter.default.post(name: NotificationPeripheralDeviceChangedToUnavailable, object: nil, userInfo: ["reason": GLError.unsupported])
+                NotificationCenter.default.post(name: NotificationErrorDidOccur, object: nil, userInfo: [NotificationErrorKey: GLError.unsupported])
             case .resetting:
-                NotificationCenter.default.post(name: NotificationPeripheralDeviceChangedToUnavailable, object: nil, userInfo: ["reason": GLError.resetting])
+                NotificationCenter.default.post(name: NotificationErrorDidOccur, object: nil, userInfo: [NotificationErrorKey: GLError.resetting])
             default:
-                NotificationCenter.default.post(name: NotificationPeripheralDeviceChangedToUnavailable, object: nil, userInfo: ["reason": GLError.unknown])
+                NotificationCenter.default.post(name: NotificationErrorDidOccur, object: nil, userInfo: [NotificationErrorKey: GLError.unknown])
             }
-
         }
     }
     
@@ -125,20 +127,15 @@ extension GLPeripheralManager {
     }
     
     internal func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didUnsubscribeFrom characteristic: CBCharacteristic) {
-        if subscribedCenteral.contains(central) {
-            subscribedCenteral.remove(at: subscribedCenteral.index(of: central)!)
-            NotificationCenter.default.post(name: NotificationPeripheralUpdateSubscriber, object: nil, userInfo: [NotificationUpdatedSubscriberUUIDStringKey: central.identifier.uuidString])
-        }
+        NotificationCenter.default.post(name: NotificationErrorDidOccur, object: nil, userInfo: [NotificationErrorKey: GLError.disconnect])
     }
     
     
     internal func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveWrite requests: [CBATTRequest]) {
-        
         for request in requests {
             if let data = request.value,
                 let dataStr = String(data: data, encoding: .utf8){
                 peripheral.respond(to: request, withResult: .success)
-                
                 switch request.characteristic.uuid.uuidString {
                 case PlayerNameCharacteristicUUIDString:
                     NotificationCenter.default.post(name: NotificationDidReceiveOtherPlayerName, object: nil, userInfo:[NotificationOtherPlayerNameKey: dataStr])
@@ -150,7 +147,6 @@ extension GLPeripheralManager {
                 default:
                     return
                 }
-                
             }
         }
     }

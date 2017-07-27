@@ -56,31 +56,34 @@ extension GLRoomCreaterViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
+        isReadyToGo = false
+        updateLaunchBtn()
+        if isRoomCreater {
+            peripheralManager?.resetGame()
+        } else {
+            centralManager?.cancelReady()
+        }
+        
         NotificationCenter.default.addObserver(self, selector: #selector(playerReadyStateUpdate(_:)), name: NotificationOtherPlayerReadyStateDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(errorDidOccur(_ :)), name: NotificationErrorDidOccur, object: nil)
         if isRoomCreater{
-            NotificationCenter.default.addObserver(self, selector: #selector(otherPlayerQuit(_:)), name: NotificationPeripheralUpdateSubscriber, object: nil)
-            NotificationCenter.default.addObserver(self, selector: #selector(otherPlayerDidJoin(_:)), name: NotificationDidReceiveOtherPlayerName, object: nil)
-            NotificationCenter.default.addObserver(self, selector: #selector(quit(_:)), name: NotificationPeripheralDeviceChangedToUnavailable, object: nil)
-        } else{
-            NotificationCenter.default.addObserver(self, selector: #selector(quit(_:)), name: NotificationCentralStateChangedToUnavailable, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(otherPlayerDidJoin(_:)), name: NotificationDidReceiveOtherPlayerName, object: nil)
         }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self, name: NotificationOtherPlayerReadyStateDidChange, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NotificationErrorDidOccur, object: nil)
         if isRoomCreater{
-            NotificationCenter.default.removeObserver(self, name: NotificationPeripheralUpdateSubscriber, object: nil)
-            NotificationCenter.default.removeObserver(self, name: NotificationPeripheralDeviceChangedToUnavailable, object: nil)
             NotificationCenter.default.removeObserver(self, name: NotificationDidReceiveOtherPlayerName, object: nil)
-        } else{
-            NotificationCenter.default.removeObserver(self, name: NotificationCentralStateChangedToUnavailable, object: nil)
         }
     }
 }
 
 // MARK: - Notification call-back method
 extension GLRoomCreaterViewController{
-    func otherPlayerDidJoin(_ notification: Notification) {
+    @objc fileprivate func otherPlayerDidJoin(_ notification: Notification) {
         if let name = notification.userInfo?[NotificationOtherPlayerNameKey] as? String{
             let otherPlayer = GLPlayer(name: name, currentFinishRate: 0, isRoomCreater: false, isReady: true)
             if playerData.contains(otherPlayer) == false {
@@ -93,7 +96,7 @@ extension GLRoomCreaterViewController{
     }
     
     
-    func playerReadyStateUpdate(_ notification: Notification){
+    @objc fileprivate func playerReadyStateUpdate(_ notification: Notification){
         if let info = notification.userInfo,
             let otherPlayerIsReady = info[NotificationOtherPlayerReadyStateKey] as? String{
             let isReady = otherPlayerIsReady == "1" ? true : false
@@ -116,21 +119,16 @@ extension GLRoomCreaterViewController{
         }
     }
     
-    func otherPlayerQuit(_ notification: Notification) {
-        playerData.removeLast()
-        DispatchQueue.main.async {[weak self] in
-            self?.collectionView.reloadData()
+    @objc fileprivate func errorDidOccur(_ notification: Notification) {
+        if let error = notification.userInfo?[NotificationErrorKey] as? GLError {
+            print(error)
+            if isRoomCreater{
+                peripheralManager!.stopAdvertising()
+            }
+            DispatchQueue.main.async {[weak self] in
+                self?.navigationController?.popToRootViewController(animated: true)
+            }
         }
-    }
-    
-    func quit(_ notification: Notification) {
-        if isRoomCreater{
-            peripheralManager!.stopAdvertising()
-        }
-        DispatchQueue.main.async {[weak self] in
-            self?.navigationController?.popViewController(animated: true)
-        }
-        
     }
 }
 

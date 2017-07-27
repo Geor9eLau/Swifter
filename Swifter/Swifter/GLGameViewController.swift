@@ -52,60 +52,45 @@ extension GLGameViewController {
         }
         
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(sendMyPlayerData), userInfo: nil, repeats: true)
-//        timer?.fire()
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         NotificationCenter.default.addObserver(self, selector: #selector(playerFinishRateDidUpdate(_:)), name: NotificationOtherPlayerFinishRateDidChange, object: nil)
-        if isRoomCreater{
-            NotificationCenter.default.addObserver(self, selector: #selector(otherPlayerQuit(_:)), name: NotificationPeripheralUpdateSubscriber, object: nil)
-            NotificationCenter.default.addObserver(self, selector: #selector(quit(_:)), name: NotificationPeripheralDeviceChangedToUnavailable, object: nil)
-        } else{
-            NotificationCenter.default.addObserver(self, selector: #selector(quit(_:)), name: NotificationCentralStateChangedToUnavailable, object: nil)
-        }
+        NotificationCenter.default.addObserver(self, selector: #selector(errorDidOccur(_ :)), name: NotificationErrorDidOccur, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self, name: NotificationOtherPlayerFinishRateDidChange, object: nil)
-        if isRoomCreater{
-            NotificationCenter.default.removeObserver(self, name: NotificationPeripheralUpdateSubscriber, object: nil)
-            NotificationCenter.default.removeObserver(self, name: NotificationPeripheralDeviceChangedToUnavailable, object: nil)
-        } else{
-            NotificationCenter.default.removeObserver(self, name: NotificationCentralStateChangedToUnavailable, object: nil)
-        }
+        NotificationCenter.default.removeObserver(self, name: NotificationErrorDidOccur, object: nil)
     }
 }
 
 // MARK: - Notification call-back method
 extension GLGameViewController{
-    func playerFinishRateDidUpdate(_ notification: Notification){
+    @objc fileprivate func playerFinishRateDidUpdate(_ notification: Notification){
         if let otherPlayerRate = notification.userInfo?[NotificationOtherPlayerFinishRateKey] as? Float {
             DispatchQueue.main.async {[weak self] in
                 self?.otherPlayerPositionLbl.text = "\(otherPlayerRate)"
                 if otherPlayerRate == 100 {
-                    let finishView = UIView(frame: UIScreen.main.bounds)
-                    finishView.backgroundColor = UIColor.red
-                    finishView.alpha = 0.5
-                    UIApplication.shared.keyWindow?.addSubview(finishView)
+                UIAlertView(title: "Boom", message: "You Lose!", delegate: nil, cancelButtonTitle: "Ok").show()
+                self?.navigationController?.popViewController(animated: true)
                 }
             }
-            
         }
     }
     
-    func otherPlayerQuit(_ notification: Notification) {
-        let finishView = UIView(frame: UIScreen.main.bounds)
-        finishView.backgroundColor = UIColor.red
-        finishView.alpha = 0.5
-        UIApplication.shared.keyWindow?.addSubview(finishView)
-    }
     
-    func quit(_ notification: Notification) {
-        if isRoomCreater{
-            peripheralManager!.stopAdvertising()
+    @objc fileprivate func errorDidOccur(_ notification: Notification) {
+        if let error = notification.userInfo?[NotificationErrorKey] as? GLError {
+            print(error)
+            if isRoomCreater{
+                peripheralManager!.stopAdvertising()
+            }
+            DispatchQueue.main.async {[weak self] in
+                self?.navigationController?.popToRootViewController(animated: true)
+            }
         }
-        navigationController?.popViewController(animated: true)
     }
 }
 
@@ -121,12 +106,10 @@ extension GLGameViewController {
     
     fileprivate func checkIfFinish() {
         if myPlayer?.currentFinishRate == 100 {
-            let finishView = UIView(frame: UIScreen.main.bounds)
-            finishView.backgroundColor = UIColor.green
-            finishView.alpha = 0.5
-            UIApplication.shared.keyWindow?.addSubview(finishView)
+            UIAlertView(title: "Boom", message: "You Lose!", delegate: nil, cancelButtonTitle: "Ok").show()
             timer?.invalidate()
             sendMyPlayerData()
+            navigationController?.popViewController(animated: true)
         }
     }
     
