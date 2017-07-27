@@ -16,6 +16,7 @@ class GLRoomListViewController: GLBaseViewController, UITableViewDelegate, UITab
     fileprivate var isRoomCreater: Bool = false
     @IBOutlet weak var tableView: UITableView!
     fileprivate var dataSource: [String] = []
+
 }
 
 // MARK: - Life cycle
@@ -23,12 +24,13 @@ extension GLRoomListViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         centralManager = GLCentralManager.default
-//        centralManager?.startScan()
+        //        centralManager?.startScan()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(didDiscoverPeripheral(_:)), name: NotificationCentralDidDiscoverPeripheral, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveOtherPlayerName), name: NotificationDidReceiveOtherPlayerName, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -44,6 +46,19 @@ extension GLRoomListViewController {
             dataSource.append(roomCreaterName)
             DispatchQueue.main.async {[weak self] in
                 self?.tableView.reloadData()
+            }
+        }
+    }
+    
+    func didReceiveOtherPlayerName(_ notification: Notification) {
+        if let name = notification.userInfo?[NotificationOtherPlayerNameKey] as? String{
+            let player = GLPlayer(name: name, currentFinishRate: 0, isRoomCreater: true, isReady: false)
+            centralManager?.playerData.insert(player, at: 0)
+            let roomVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GLRoomCreaterViewController") as! GLRoomCreaterViewController
+            roomVC.isRoomCreater = false
+            
+            DispatchQueue.main.async {
+                self.navigationController?.pushViewController(roomVC, animated: true)
             }
         }
     }
@@ -69,18 +84,7 @@ extension GLRoomListViewController {
 extension GLRoomListViewController {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-            centralManager?.connect(with: dataSource[indexPath.row], {[weak self] (didConnect) in
-                if didConnect{
-                    DispatchQueue.main.async {[weak self] in
-                        let roomVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GLRoomCreaterViewController") as! GLRoomCreaterViewController
-                        roomVC.isRoomCreater = false
-                        self?.navigationController?.pushViewController(roomVC, animated: true)
-                    }
-                    
-                }else{
-                    print("Connect failed!")
-                }
-            })
+        centralManager?.connect(with: dataSource[indexPath.row])
     }
 }
 

@@ -21,16 +21,15 @@ class GLPeripheralManager: NSObject, CBPeripheralManagerDelegate {
        return GLPeripheralManager()
     }()
     
-    typealias StartGameHandler = (_ isSucceed: Bool) -> ()
-    fileprivate var startHandler: StartGameHandler?
     fileprivate let queue = DispatchQueue(label: "PeripheralQueue")
     fileprivate var manager: CBPeripheralManager!
     fileprivate var playerDataService: CBMutableService!
     fileprivate var subscribedCenteral: [CBCentral] = []
-    fileprivate var gameCreaterCharacteristic: CBMutableCharacteristic?
-    fileprivate var playerDataCharacteristic: CBMutableCharacteristic?
+    fileprivate var playerFinishRateCharacteristic: CBMutableCharacteristic!
+    fileprivate var playerReadyStateCharacteristic: CBMutableCharacteristic!
+    fileprivate var playerNameCharacteristic: CBMutableCharacteristic!
     var peripheralPlayer = GLPlayer(name: UIDevice.current.name, currentFinishRate: 0, isRoomCreater: true, isReady: false)
-    fileprivate var playerData: [GLPlayer] = []
+    var playerData: [GLPlayer] = []
     private override init() {
         super.init()
         manager = CBPeripheralManager(delegate: self, queue: queue)
@@ -43,10 +42,12 @@ class GLPeripheralManager: NSObject, CBPeripheralManagerDelegate {
 // MARK: - Private
 extension GLPeripheralManager {
     fileprivate func setupService(){
-        playerDataCharacteristic = CBMutableCharacteristic(type: CBUUID(string: PlayerDataCharacteristicUUIDString), properties: [.notify ,.write, .read], value: nil, permissions: .writeable)
-//        gameCreaterCharacteristic = CBMutableCharacteristic(type: CBUUID(string: GameCreaterCharacteristicUUIDString), properties: .read, value: [peripheralPlayer].transformPlayerDataToData() , permissions: .readable)
+        playerNameCharacteristic = CBMutableCharacteristic(type: CBUUID(string: PlayerNameCharacteristicUUIDString), properties: [.indicate, .read, .write], value:nil, permissions: [.readable ,.writeable])
+        playerReadyStateCharacteristic = CBMutableCharacteristic(type: CBUUID(string: PlayerReadyStateCharacteristicUUIDString), properties: [.indicate, .write, .read] , value: nil, permissions: [.readable, .writeable])
+        playerFinishRateCharacteristic = CBMutableCharacteristic(type: CBUUID(string: PlayerFinishRateCharacteristicUUIDString), properties: [.indicate, .write, .read], value: nil, permissions: [.readable, .writeable])
+        
         playerDataService = CBMutableService(type: CBUUID(string: PlayerDataServiceUUIDString), primary: true)
-        playerDataService.characteristics = [playerDataCharacteristic!]
+        playerDataService.characteristics = [playerFinishRateCharacteristic, playerNameCharacteristic, playerReadyStateCharacteristic]
     }
 }
 
@@ -74,14 +75,12 @@ extension GLPeripheralManager {
         
     }
     
-    func startGame(_ handler: @escaping StartGameHandler) {
-        startHandler = handler
-        guard playerData.filter({$0.isReady == false}).count == 1 else {
-            print("Some player is not ready to go")
-            return
-        }
+    func startGame() {
         peripheralPlayer.isReady = true
-        updatePeripheralPlayerData()
+        
+        if let data = "1".data(using: .utf8){
+            manager.updateValue(data, for: playerReadyStateCharacteristic, onSubscribedCentrals: nil)
+        }
     }
     
 }
@@ -90,19 +89,9 @@ extension GLPeripheralManager {
 // MARK: - Private
 extension GLPeripheralManager {
     fileprivate func updatePeripheralPlayerData() {
-        if let characteristic = playerDataCharacteristic {
-            playerData = playerData.flatMap({ (player) -> GLPlayer in
-                if player == peripheralPlayer{
-                    return peripheralPlayer
-                }else{
-                    return player
-                }
-            })
-            if let data = playerData.transformPlayerDataToData(){
-                manager.updateValue(data, for: characteristic, onSubscribedCentrals: subscribedCenteral)
-            }
+        if let data = "\(peripheralPlayer.currentFinishRate)".data(using: .utf8){
+            manager.updateValue(data, for: playerFinishRateCharacteristic, onSubscribedCentrals: nil)
         }
-        
     }
 }
 
@@ -145,18 +134,25 @@ extension GLPeripheralManager {
     
     internal func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveWrite requests: [CBATTRequest]) {
         
-       
-        if let request = requests.first,
-            let data = request.value{
-             peripheral.respond(to: request, withResult: .success)
-            playerData = data.transformDataToPlayerData()
-            if playerData.count == 1 {
-                playerData.append(peripheralPlayer)
-            self.manager.updateValue(self.playerData.transformPlayerDataToData()!, for: self.playerDataCharacteristic!, onSubscribedCentrals: self.subscribedCenteral)
+        for request in requests {
+            if let data = request.value,
+                let dataStr = String(data: data, encoding: .utf8){
+                peripheral.respond(to: request, withResult: .success)
+                
+                switch request.characteristic.uuid.uuidString {
+                case PlayerNameCharacteristicUUIDString:
+                    NotificationCenter.default.post(name: NotificationDidReceiveOtherPlayerName, object: nil, userInfo:[NotificationOtherPlayerNameKey: dataStr])
+                    peripheral.updateValue(peripheralPlayer.name.data(using: .utf8)!, for: playerNameCharacteristic, onSubscribedCentrals: subscribedCenteral)
+                case PlayerFinishRateCharacteristicUUIDString:
+                    NotificationCenter.default.post(name: NotificationOtherPlayerFinishRateDidChange, object: nil, userInfo:[NotificationOtherPlayerFinishRateKey: Float(dataStr) as Any])
+                case PlayerReadyStateCharacteristicUUIDString:
+                    NotificationCenter.default.post(name: NotificationOtherPlayerReadyStateDidChange, object: nil, userInfo: [NotificationOtherPlayerReadyStateKey: dataStr as Any])
+                default:
+                    return
+                }
+                
             }
-            NotificationCenter.default.post(name: NotificationPlayerDataUpdate, object: nil, userInfo: [NotificationPlayerDataUpdateKey: playerData])
         }
-        
     }
     
     internal func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?) {

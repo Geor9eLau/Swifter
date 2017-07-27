@@ -10,7 +10,6 @@ import Foundation
 
 let NotificationErrorKey = "ReasonForError"
 let NotificationUpdatedSubscriberUUIDStringKey = "UpdatedSubscriberUUIDStringKey"
-let NotificationPlayerDataUpdateKey = "PlayerDataUpdateKey"
 let NotificationCentralDidDiscoverPeripheralKey = "CentralDidDiscoverPeripheralKey"
 
 let NotificationCentralDidConnect = NSNotification.Name(rawValue: "CentralDidConnect")
@@ -19,4 +18,11 @@ let NotificationCentralDidDiscoverPeripheral = Notification.Name(rawValue: "Cent
 let NotificationPeripheralDeviceChangedToUnavailable = Notification.Name(rawValue: "PeripheralDeviceChangedToUnavailable")
 
 let NotificationPeripheralUpdateSubscriber = Notification.Name(rawValue: "PeripheralUpdateSubscriber")
-let NotificationPlayerDataUpdate = Notification.Name(rawValue: "PlayerDataUpdate")
+
+
+let NotificationDidReceiveOtherPlayerName = Notification.Name(rawValue: "ReceivePlayerName")
+let NotificationOtherPlayerReadyStateDidChange = Notification.Name(rawValue: "PlayerReadyStateDidChange")
+let NotificationOtherPlayerFinishRateDidChange = Notification.Name(rawValue: "PlayerFinishRateDidChange")
+let NotificationOtherPlayerNameKey = "OtherPlayerNameKey"
+let NotificationOtherPlayerReadyStateKey = "OtherPlayerReadyStateKey"
+let NotificationOtherPlayerFinishRateKey = "OtherPlayerFinishRateKey"

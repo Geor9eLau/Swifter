@@ -66,121 +66,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Swifter/GLGameViewController.swift"
-            timestampString = "522557809.066676"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "8"
-            endingLineNumber = "8">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Swifter.GLGameViewController.__deallocating_deinit"
-                  moduleName = "Swifter"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/George/iOS%E9%A1%B9%E7%9B%AE/Swifter/Swifter/Swifter/GLGameViewController.swift"
-                  timestampString = "522645874.929232"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "12"
-                  endingLineNumber = "12"
-                  offsetFromSymbolStart = "0">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Swifter.GLGameViewController.__ivar_destroyer"
-                  moduleName = "Swifter"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/George/iOS%E9%A1%B9%E7%9B%AE/Swifter/Swifter/Swifter/GLGameViewController.swift"
-                  timestampString = "522645874.930495"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "12"
-                  endingLineNumber = "12"
-                  offsetFromSymbolStart = "0">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Swifter.GLGameViewController.init (nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;__ObjC.Bundle&gt;) -&gt; Swifter.GLGameViewController"
-                  moduleName = "Swifter"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/George/iOS%E9%A1%B9%E7%9B%AE/Swifter/Swifter/Swifter/GLGameViewController.swift"
-                  timestampString = "522645874.931706"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "12"
-                  endingLineNumber = "12"
-                  offsetFromSymbolStart = "0">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Swifter.GLGameViewController.__allocating_init (nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;__ObjC.Bundle&gt;) -&gt; Swifter.GLGameViewController"
-                  moduleName = "Swifter"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/George/iOS%E9%A1%B9%E7%9B%AE/Swifter/Swifter/Swifter/GLGameViewController.swift"
-                  timestampString = "522645874.933007"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "12"
-                  endingLineNumber = "12"
-                  offsetFromSymbolStart = "0">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Swifter.GLGameViewController.__allocating_init (coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;Swifter.GLGameViewController&gt;"
-                  moduleName = "Swifter"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/George/iOS%E9%A1%B9%E7%9B%AE/Swifter/Swifter/Swifter/GLGameViewController.swift"
-                  timestampString = "522645874.934448"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "12"
-                  endingLineNumber = "12"
-                  offsetFromSymbolStart = "0">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Swifter.GLGameViewController.init (coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;Swifter.GLGameViewController&gt;"
-                  moduleName = "Swifter"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/George/iOS%E9%A1%B9%E7%9B%AE/Swifter/Swifter/Swifter/GLGameViewController.swift"
-                  timestampString = "522645874.936263"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "12"
-                  endingLineNumber = "12"
-                  offsetFromSymbolStart = "0">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Swifter/GLCentralManager.swift"
-            timestampString = "522580071.057577"
+            timestampString = "522833229.135187"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
             landmarkName = "centralManager(_:didDiscover:advertisementData:rssi:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -192,11 +86,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Swifter/GLCentralManager.swift"
-            timestampString = "522580071.057577"
+            timestampString = "522833229.135187"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
             landmarkName = "startScan()"
             landmarkType = "7">
          </BreakpointContent>
@@ -208,139 +102,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Swifter/GLPeripheralManager.swift"
-            timestampString = "522580545.047415"
+            timestampString = "522835788.922489"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134"
-            landmarkName = "peripheralManager(_:central:didSubscribeTo:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Swifter/GLPeripheralManager.swift"
-            timestampString = "522575802.116365"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
-            landmarkName = "setupService()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Swifter/GLCentralManager.swift"
-            timestampString = "522580071.057577"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
-            landmarkName = "updateCentralPlayerData()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Swifter/GLPeripheralManager.swift"
-            timestampString = "522579517.964792"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
-            landmarkName = "setupService()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Swifter/GLCentralManager.swift"
-            timestampString = "522581391.235226"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "198"
-            endingLineNumber = "198"
-            landmarkName = "peripheral(_:didUpdateValueFor:error:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Swifter/GLCentralManager.swift"
-            timestampString = "522645636.965421"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "306"
-            endingLineNumber = "306"
-            landmarkName = "transformDataToPlayerData()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Swifter/GLCentralManager.swift"
-            timestampString = "522645636.965421"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "296"
-            endingLineNumber = "296"
-            landmarkName = "transformDataToPlayerData()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Swifter/GLCentralManager.swift"
-            timestampString = "522645636.965421"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "269"
-            endingLineNumber = "269"
-            landmarkName = "transformPlayerDataToData()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Swifter/GLPeripheralManager.swift"
-            timestampString = "522640732.447567"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
             landmarkName = "peripheralManagerDidUpdateState(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -352,11 +118,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Swifter/GLCentralManager.swift"
-            timestampString = "522640757.885057"
+            timestampString = "522833229.135187"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "143"
-            endingLineNumber = "143"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
             landmarkName = "centralManagerDidUpdateState(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -364,16 +130,80 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Swifter/GLRoomCreaterViewController.swift"
+            timestampString = "522835319.905908"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "playGame(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Swifter/GLPeripheralManager.swift"
-            timestampString = "522643313.500516"
+            timestampString = "522837643.614999"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "147"
-            endingLineNumber = "147"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
             landmarkName = "peripheralManager(_:didReceiveWrite:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Swifter/GLCentralManager.swift"
+            timestampString = "522837762.95096"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "209"
+            endingLineNumber = "209"
+            landmarkName = "peripheral(_:didDiscoverCharacteristicsFor:error:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Swifter/GLGameViewController.swift"
+            timestampString = "522838896.217894"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
+            landmarkName = "sendMyPlayerData()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Swifter/GLCentralManager.swift"
+            timestampString = "522837872.808991"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
+            landmarkName = "updateFinishRate(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -384,13 +214,93 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Swifter/GLCentralManager.swift"
-            timestampString = "522643446.06517"
+            timestampString = "522837907.146705"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "213"
-            endingLineNumber = "213"
+            startingLineNumber = "201"
+            endingLineNumber = "201"
             landmarkName = "peripheral(_:didWriteValueFor:error:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Swifter/GLPeripheralManager.swift"
+            timestampString = "522838075.843637"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
+            landmarkName = "updatePeripheralPlayerData()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Swifter/GLPeripheralManager.swift"
+            timestampString = "522838146.649394"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "startGame()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Swifter/GLCentralManager.swift"
+            timestampString = "522839202.789573"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
+            landmarkName = "peripheral(_:didUpdateValueFor:error:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Swifter.GLCentralManager.peripheral (__ObjC.CBPeripheral, didUpdateValueFor : __ObjC.CBCharacteristic, error : Swift.Optional&lt;Swift.Error&gt;) -&gt; ()"
+                  moduleName = "Swifter"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/George/iOS%E9%A1%B9%E7%9B%AE/Swifter/Swifter/Swifter/GLCentralManager.swift"
+                  timestampString = "522839203.007458"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "181"
+                  endingLineNumber = "181"
+                  offsetFromSymbolStart = "480">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Swifter.GLCentralManager.peripheral (__ObjC.CBPeripheral, didUpdateValueFor : __ObjC.CBCharacteristic, error : Swift.Optional&lt;Swift.Error&gt;) -&gt; ()"
+                  moduleName = "Swifter"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/George/iOS%E9%A1%B9%E7%9B%AE/Swifter/Swifter/Swifter/GLCentralManager.swift"
+                  timestampString = "522839203.008847"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "181"
+                  endingLineNumber = "181"
+                  offsetFromSymbolStart = "600">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

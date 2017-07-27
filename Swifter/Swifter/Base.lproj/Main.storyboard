@@ -263,7 +263,7 @@
         <!--Swifter-->
         <scene sceneID="HQk-Jb-qjg">
             <objects>
-                <viewController title="Swifter" id="n91-dl-vKa" customClass="GLGameViewController" customModule="Swifter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GameViewController" title="Swifter" id="n91-dl-vKa" customClass="GLGameViewController" customModule="Swifter" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="EIz-DS-Qjl"/>
                         <viewControllerLayoutGuide type="bottom" id="t90-DV-LL8"/>
@@ -278,6 +278,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QH8-NJ-Lve">
                                         <rect key="frame" x="0.0" y="0.0" width="187.5" height="80"/>
                                         <color key="backgroundColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                        <state key="normal" title="Left"/>
                                         <connections>
                                             <action selector="leftBtnDidTapped:" destination="n91-dl-vKa" eventType="touchUpInside" id="bvq-9u-61A"/>
                                         </connections>
@@ -285,6 +286,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QIF-ao-o3r">
                                         <rect key="frame" x="187.5" y="0.0" width="187.5" height="80"/>
                                         <color key="backgroundColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                        <state key="normal" title="Right"/>
                                         <connections>
                                             <action selector="rightBtnDidTapped:" destination="n91-dl-vKa" eventType="touchUpInside" id="Kve-YR-0O8"/>
                                         </connections>
@@ -297,13 +299,6 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ej1-gw-zZu">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="587"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bd0-UD-gid">
-                                <rect key="frame" x="111" y="28" width="153" height="38"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qVs-D7-nRW">
                                 <rect key="frame" x="50" y="424.5" width="132.5" height="132.5"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -318,6 +313,20 @@
                                     <constraint firstAttribute="width" secondItem="oZv-pK-zPJ" secondAttribute="height" multiplier="1:1" id="idr-sG-xzE"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ph-MP-4aa">
+                                <rect key="frame" x="111" y="196" width="153" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bd0-UD-gid">
+                                <rect key="frame" x="111" y="119" width="153" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -340,6 +349,7 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="currentPostionLbl" destination="bd0-UD-gid" id="egd-FI-OTN"/>
+                        <outlet property="otherPlayerPositionLbl" destination="8ph-MP-4aa" id="fDQ-4Y-fUt"/>
                         <outlet property="otherPlayerView" destination="oZv-pK-zPJ" id="KoC-i9-VfL"/>
                     </connections>
                 </viewController>

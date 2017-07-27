@@ -10,32 +10,24 @@ import Foundation
 import CoreBluetooth
 import UIKit
 
-let GameConnectUUIDString = "8D50AD4E-E058-404C-8DD6-E116C8376D43"
+let PlayerReadyStateCharacteristicUUIDString = "8D50AD4E-E058-404C-8DD6-E116C8376D43"
 
 let PlayerDataServiceUUIDString = "69C88932-A2FD-4FB0-B74E-917ADEFFAF04"
-let PlayerDataCharacteristicUUIDString = "2B9437B4-D3DA-4ED2-9CD1-59AFD2BB593F"
-let GameCreaterCharacteristicUUIDString = "A853EEBC-481C-43AA-8589-515B196E7EB6"
-
-//protocol GLCentralManagerDelegate: class {
-//    func centralManager(_ manager: GLCentralManager, update playerData: Data)
-//    func centralManager(_ manager: GLCentralManager, didFail error: GLError)
-//    func centralManager(_ manager: GLCentralManager, didDiscoverPeripheral peripheralNameInfo: [String])
-//    func centralManagerDidConectedToTarget(_ manager: GLCentralManager)
-//}
+let PlayerNameCharacteristicUUIDString = "2B9437B4-D3DA-4ED2-9CD1-59AFD2BB593F"
+let PlayerFinishRateCharacteristicUUIDString = "A853EEBC-481C-43AA-8589-515B196E7EB6"
 
 class GLCentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     static let `default`: GLCentralManager = {
         return GLCentralManager()
     }()
     
-    typealias ConnectHandler = (Bool) -> ()
-    
-    fileprivate var connectHandler: ConnectHandler?
     fileprivate let queue = DispatchQueue(label: "CentralQueue")
     fileprivate var manager: CBCentralManager!
     fileprivate let playerDataServiceUUID = UUID(uuidString: PlayerDataServiceUUIDString)
     fileprivate var connectedPeripheral: CBPeripheral?
-    fileprivate var playerDataCharacteristic: CBCharacteristic?
+    fileprivate var playerFinishRateCharacteristic: CBCharacteristic?
+    fileprivate var playerReadyStateCharacteristic: CBCharacteristic?
+    fileprivate var playerNameCharacteristic: CBCharacteristic?
     fileprivate var discoveredPeripheralNameInfo: [String] = []
     var playerData: [GLPlayer] = []
     override init() {
@@ -49,7 +41,6 @@ class GLCentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
     
     
     var discoveredPeripherals: [CBPeripheral]  = []
-    
     var connectedPeripherals: [CBPeripheral] {
         if let validUUID = playerDataServiceUUID{
             return manager.retrieveConnectedPeripherals(withServices: [CBUUID(nsuuid: validUUID)])
@@ -71,13 +62,9 @@ extension GLCentralManager {
     }
     
     
-    func connect(with roomName: String, _ handler: @escaping ConnectHandler) {
-        connectHandler = handler
+    func connect(with roomName: String) {
         manager.connect(discoveredPeripherals.first!, options: [CBConnectPeripheralOptionNotifyOnConnectionKey: true, CBConnectPeripheralOptionNotifyOnDisconnectionKey: true])
-        
-//        if let targetPeripheral = self.discoveredPeripherals.filter({$0.name == roomName}).first{
-//            manager.connect(targetPeripheral, options: [CBConnectPeripheralOptionNotifyOnConnectionKey: true, CBConnectPeripheralOptionNotifyOnDisconnectionKey: true])
-//        }
+
     }
     
     func disconnect() {
@@ -88,17 +75,31 @@ extension GLCentralManager {
     
     func updateFinishRate(_ rate: Float) {
         centralPlayer.currentFinishRate = rate
-        updateCentralPlayerData()
+        
+        if let data = "\(rate)".data(using: .utf8),
+            let peripheral = connectedPeripheral,
+             let characteristic = playerFinishRateCharacteristic{
+            peripheral.writeValue(data, for: characteristic, type: .withResponse)
+        }
     }
     
     func cancelReady(){
         centralPlayer.isReady = false
-        updateCentralPlayerData()
+        
+        if let data = "0".data(using: .utf8),
+            let peripheral = connectedPeripheral,
+            let characteristic = playerReadyStateCharacteristic{
+            peripheral.writeValue(data, for: characteristic, type: .withResponse)
+        }
     }
     
     func getReady() {
         centralPlayer.isReady = true
-        updateCentralPlayerData()
+        if let data = "1".data(using: .utf8),
+            let peripheral = connectedPeripheral,
+            let characteristic = playerReadyStateCharacteristic{
+            peripheral.writeValue(data, for: characteristic, type: .withResponse)
+        }
     }
 }
 
@@ -108,22 +109,6 @@ extension GLCentralManager {
     fileprivate func scan() {
         if manager.state == .poweredOn{
             manager.scanForPeripherals(withServices: [CBUUID(string: PlayerDataServiceUUIDString)], options: nil)
-        }
-    }
-    
-    fileprivate func updateCentralPlayerData() {
-        if let peripheral = connectedPeripheral,
-            let characteristic = playerDataCharacteristic{
-            playerData = playerData.flatMap({ (player) -> GLPlayer in
-                if player == centralPlayer{
-                    return centralPlayer
-                }else{
-                    return player
-                }
-            })
-            if let data = playerData.transformPlayerDataToData(){
-                peripheral.writeValue(data, for: characteristic, type: .withResponse)
-            }
         }
     }
 }
@@ -181,9 +166,6 @@ extension GLCentralManager{
     
     internal func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
         NotificationCenter.default.post(name: NotificationCentralStateChangedToUnavailable, object: nil, userInfo: ["reason": GLError.failToConnect])
-        if let handler = connectHandler {
-            handler(false)
-        }
     }
 }
 
@@ -195,18 +177,23 @@ extension GLCentralManager {
         if error != nil {
             print(error!)
         }
-        if characteristic.service.uuid.uuidString == PlayerDataServiceUUIDString {
-            if let data = characteristic.value{
-                playerData = data.transformDataToPlayerData()
-                NotificationCenter.default.post(name: NotificationPlayerDataUpdate, object: nil, userInfo: [NotificationPlayerDataUpdateKey: playerData])
-                if playerData.count == 2 {
-                    if connectHandler != nil {
-                        connectHandler!(true)
-                    }
-                }
+    
+        if let data = characteristic.value,
+            let dataStr = String(data: data, encoding: .utf8){
+            switch characteristic.uuid.uuidString {
+            case PlayerNameCharacteristicUUIDString:
+                NotificationCenter.default.post(name: NotificationDidReceiveOtherPlayerName, object: nil, userInfo: [NotificationOtherPlayerNameKey: dataStr])
                 
+            case PlayerReadyStateCharacteristicUUIDString:
+                NotificationCenter.default.post(name: NotificationOtherPlayerReadyStateDidChange, object: nil, userInfo: [NotificationOtherPlayerReadyStateKey: dataStr])
+            case PlayerFinishRateCharacteristicUUIDString:
+                let rate = Float(dataStr)
+                NotificationCenter.default.post(name: NotificationOtherPlayerFinishRateDidChange, object: nil, userInfo: [NotificationOtherPlayerFinishRateKey: rate as Any])
+            default:
+                return
             }
         }
+
     }
     
     internal func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
@@ -220,17 +207,23 @@ extension GLCentralManager {
     internal func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         if service.uuid.uuidString == PlayerDataServiceUUIDString {
             for characteristic in service.characteristics! {
-                if characteristic.uuid.uuidString == GameCreaterCharacteristicUUIDString {
-                    playerData.append((characteristic.value?.transformDataToPlayerData().first)!)
-                } else {
+                switch characteristic.uuid.uuidString {
+                case PlayerNameCharacteristicUUIDString:
+                    playerNameCharacteristic = characteristic
                     peripheral.setNotifyValue(true, for: characteristic)
-                    playerDataCharacteristic = characteristic
-                    if let data = playerData.transformPlayerDataToData(){
-//                        peripheral.readValue(for: characteristic)
-                         peripheral.writeValue(data, for: playerDataCharacteristic!, type: .withResponse)
-                        
+                    if let myNameData = centralPlayer.name.data(using: .utf8){
+                        peripheral.writeValue(myNameData, for: characteristic, type: .withResponse)
                     }
+                case PlayerReadyStateCharacteristicUUIDString:
+                    playerReadyStateCharacteristic = characteristic
+                    peripheral.setNotifyValue(true, for: characteristic)
+                case PlayerFinishRateCharacteristicUUIDString:
+                    playerFinishRateCharacteristic = characteristic
+                    peripheral.setNotifyValue(true, for: characteristic)
+                default:
+                    return
                 }
+                
             }
         }
     }
@@ -250,7 +243,6 @@ extension GLCentralManager {
         connectedPeripheral = peripheral
         if let service = peripheral.services?.first {
             peripheral.discoverCharacteristics(nil, for: service)
-//            peripheral.discoverCharacteristics([CBUUID(string: PlayerDataCharacteristicUUIDString)], for:service)
         }
         
     }
@@ -259,62 +251,4 @@ extension GLCentralManager {
 
 
 
-
-extension Array where Element == GLPlayer {
-
-    func transformPlayerDataToData() -> Data? {
-        
-        if let jsonStr = [GLPlayer].toJSONString(self)(prettyPrint: false){
-            let resultStr = "\(jsonStr)Swifter!!!!!!!!!!!!!"
-            return resultStr.data(using: .utf8)
-        }
-        return nil
-        
-        
-        var tmpJson:[[String: Any]] = []
-        for player in self{
-            if let json = player.toJSON(){
-                tmpJson.append(json)
-            }
-        }
-        do {
-            let data = try JSONSerialization.data(withJSONObject: tmpJson, options: .prettyPrinted)
-            return data
-        }catch(let error){
-            print(error)
-        }
-        return nil
-    }
-}
-
-
-extension Data {
-    func transformDataToPlayerData() -> [GLPlayer] {
-        
-        if let resultStr = String(data: self, encoding: .utf8),
-            let jsonStr = resultStr.components(separatedBy: "Swifter").first{
-            if let result = [GLPlayer].deserialize(from: jsonStr) as? [GLPlayer]{
-                return result
-            }
-        }
-        return []
-
-        
-        var tmpPlayers:[GLPlayer] = []
-        do {
-            let playerDataArray = try JSONSerialization.jsonObject(with: self, options: .mutableContainers)
-            
-            
-
-            for playerData in playerDataArray as! [[String: Any]]{
-                if let player = GLPlayer.deserialize(from: playerData as NSDictionary){
-                    tmpPlayers.append(player)
-                }
-            }
-        } catch(let error){
-            print(error)
-        }
-        return tmpPlayers
-    }
-}
 

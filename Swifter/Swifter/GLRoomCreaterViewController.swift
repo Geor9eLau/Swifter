@@ -21,11 +21,10 @@ class GLRoomCreaterViewController: GLBaseViewController, UICollectionViewDelegat
     
     @IBAction func playGame(_ sender: Any) {
         if isRoomCreater {
-            peripheralManager?.startGame({[weak self] (isSucceed) in
-                let gameVC = GLGameViewController(nibName: "GLGameViewController", bundle: nil)
-                gameVC.isRoomCreater = true
-                self?.navigationController?.pushViewController(gameVC, animated: true)
-            })
+            peripheralManager?.startGame()
+            let gameVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GameViewController") as! GLGameViewController
+            gameVC.isRoomCreater = true
+            navigationController?.pushViewController(gameVC, animated: true)
         } else {
             if isReadyToGo {
                 centralManager?.cancelReady()
@@ -45,8 +44,7 @@ extension GLRoomCreaterViewController{
         super.viewDidLoad()
         if isRoomCreater {
             peripheralManager = GLPeripheralManager.default
-//            peripheralManager!.startAdvertising()
-            playerData.append(peripheralManager!.peripheralPlayer)
+            playerData = (peripheralManager?.playerData)!
             collectionView.reloadData()
         } else{
             centralManager = GLCentralManager.default
@@ -58,9 +56,10 @@ extension GLRoomCreaterViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        NotificationCenter.default.addObserver(self, selector: #selector(playerDataDidUpdate(_:)), name: NotificationPlayerDataUpdate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(playerReadyStateUpdate(_:)), name: NotificationOtherPlayerReadyStateDidChange, object: nil)
         if isRoomCreater{
             NotificationCenter.default.addObserver(self, selector: #selector(otherPlayerQuit(_:)), name: NotificationPeripheralUpdateSubscriber, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(otherPlayerDidJoin(_:)), name: NotificationDidReceiveOtherPlayerName, object: nil)
             NotificationCenter.default.addObserver(self, selector: #selector(quit(_:)), name: NotificationPeripheralDeviceChangedToUnavailable, object: nil)
         } else{
             NotificationCenter.default.addObserver(self, selector: #selector(quit(_:)), name: NotificationCentralStateChangedToUnavailable, object: nil)
@@ -68,10 +67,11 @@ extension GLRoomCreaterViewController{
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        NotificationCenter.default.removeObserver(self, name: NotificationPlayerDataUpdate, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NotificationOtherPlayerReadyStateDidChange, object: nil)
         if isRoomCreater{
             NotificationCenter.default.removeObserver(self, name: NotificationPeripheralUpdateSubscriber, object: nil)
             NotificationCenter.default.removeObserver(self, name: NotificationPeripheralDeviceChangedToUnavailable, object: nil)
+            NotificationCenter.default.removeObserver(self, name: NotificationDidReceiveOtherPlayerName, object: nil)
         } else{
             NotificationCenter.default.removeObserver(self, name: NotificationCentralStateChangedToUnavailable, object: nil)
         }
@@ -80,35 +80,45 @@ extension GLRoomCreaterViewController{
 
 // MARK: - Notification call-back method
 extension GLRoomCreaterViewController{
-    func playerDataDidUpdate(_ notification: Notification){
-        if let players = notification.userInfo?[NotificationPlayerDataUpdateKey] as? [GLPlayer] {
-            DispatchQueue.main.async {[weak self] in
-                self?.playerData = players
-                self?.collectionView.reloadData()
-                if (self?.isRoomCreater)! {
-                    guard self?.playerData.filter({$0.isReady == false}).count == 1 else {
-                        print("Some player is not ready to go")
-                        self?.isReadyToGo = false
-                        self?.updateLaunchBtn()
-                        return
-                    }
-                    self?.isReadyToGo = true
-                    self?.updateLaunchBtn()
-                } else {
-                    if self?.playerData.filter({$0.isReady == false}).count == 0 {
-                        let gameVC = GLGameViewController(nibName: "GLGameViewController", bundle: nil)
-                        gameVC.isRoomCreater = false
-                        self?.navigationController?.pushViewController(gameVC, animated: true)
+    func otherPlayerDidJoin(_ notification: Notification) {
+        if let name = notification.userInfo?[NotificationOtherPlayerNameKey] as? String{
+            let otherPlayer = GLPlayer(name: name, currentFinishRate: 0, isRoomCreater: false, isReady: true)
+            if playerData.contains(otherPlayer) == false {
+                playerData.append(otherPlayer)
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+            }
+        }
+    }
+    
+    
+    func playerReadyStateUpdate(_ notification: Notification){
+        if let info = notification.userInfo,
+            let otherPlayerIsReady = info[NotificationOtherPlayerReadyStateKey] as? String{
+            let isReady = otherPlayerIsReady == "1" ? true : false
+            if isRoomCreater {
+                isReadyToGo = isReady
+                DispatchQueue.main.async {
+                    self.updateLaunchBtn()
+                }
+                
+            } else {
+                if isReady {
+                    let gameVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GameViewController") as! GLGameViewController
+                    gameVC.isRoomCreater = false
+                    
+                    DispatchQueue.main.async {
+                        self.navigationController?.pushViewController(gameVC, animated: true)
                     }
                 }
             }
-            
         }
     }
     
     func otherPlayerQuit(_ notification: Notification) {
+        playerData.removeLast()
         DispatchQueue.main.async {[weak self] in
-            self?.playerData.append((self?.peripheralManager!.peripheralPlayer)!)
             self?.collectionView.reloadData()
         }
     }
@@ -166,11 +176,8 @@ extension GLRoomCreaterViewController{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PlayerInfoCellIdentifier, for: indexPath) as! GLPlayerInfoCell
         cell.avatar = nil
-        if indexPath.row == 0 {
-            cell.nameLbl.text = UIDevice.current.name
-        }else{
-            cell.nameLbl.text = "Player \(indexPath.row + 1)"
-        }
+        let player = playerData[indexPath.row]
+        cell.nameLbl.text = player.name
         
         return cell
     }
