@@ -106,7 +106,7 @@ extension GLGameViewController {
     
     fileprivate func checkIfFinish() {
         if myPlayer?.currentFinishRate == 100 {
-            UIAlertView(title: "Boom", message: "You Lose!", delegate: nil, cancelButtonTitle: "Ok").show()
+            UIAlertView(title: "Boom", message: "You Win!", delegate: nil, cancelButtonTitle: "Ok").show()
             timer?.invalidate()
             sendMyPlayerData()
             navigationController?.popViewController(animated: true)
